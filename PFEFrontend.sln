@@ -3,7 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "PFEFrontend", "PFEFrontend.esproj", "{DC0F6B00-67FD-4A59-B3A5-6BFB17D9541B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFEBackend", "..\PFEBackend\PFEBackend.csproj", "{F446A6D9-54D8-4EF9-BB5D-99931369FE19}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC0F6B00-67FD-4A59-B3A5-6BFB17D9541B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0F6B00-67FD-4A59-B3A5-6BFB17D9541B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0F6B00-67FD-4A59-B3A5-6BFB17D9541B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DC0F6B00-67FD-4A59-B3A5-6BFB17D9541B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0F6B00-67FD-4A59-B3A5-6BFB17D9541B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC0F6B00-67FD-4A59-B3A5-6BFB17D9541B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F446A6D9-54D8-4EF9-BB5D-99931369FE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F446A6D9-54D8-4EF9-BB5D-99931369FE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F446A6D9-54D8-4EF9-BB5D-99931369FE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F446A6D9-54D8-4EF9-BB5D-99931369FE19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
