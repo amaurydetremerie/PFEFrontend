@@ -1,0 +1,16 @@
+{
+  "credentials": {
+    "clientId": "abd0bbde-60ca-4936-adc9-70221e45446e",
+    "tenantId": "8a1c421c-3731-4d67-8217-35d566f98717"
+  },
+  "configuration": {
+    "redirectUri": "http://localhost:4200",
+    "postLogoutRedirectUri": "http://localhost:4200"
+  },
+  "resources": {
+    "todoListApi": {
+      "resourceUri": "https://localhost:7252",
+      "resourceScopes": [ "https://pfebackend.azurewebsites.net/access_as_user" ]
+    }
+  }
+}
