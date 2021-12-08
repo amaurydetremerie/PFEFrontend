@@ -24,7 +24,7 @@ export function loggerCallback(logLevel: LogLevel, message: string) {
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
-      clientId: '6a9a8ee8-ae5d-42eb-9d99-2cb605c63cad',
+      clientId: 'abd0bbde-60ca-4936-adc9-70221e45446e',
       authority: 'https://login.microsoftonline.com/8a1c421c-3731-4d67-8217-35d566f98717',
       redirectUri: 'https://pfefrontend.azurewebsites.net/'
     },
