@@ -1,0 +1,80 @@
+<mat-card class='card-section'>
+  <div class="mat-elevation-z8">
+    <h2>WeatherForecast</h2>
+    <table mat-table [dataSource]="weatherforecasts">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let weatherforecast">{{weatherforecast.date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="temperatureC">
+        <th mat-header-cell *matHeaderCellDef> Temperature in C° </th>
+        <td mat-cell *matCellDef="let weatherforecast">{{weatherforecast.temperatureC}}</td>
+      </ng-container>
+      <ng-container matColumnDef="temperatureF">
+        <th mat-header-cell *matHeaderCellDef> Temperature in F° </th>
+        <td mat-cell *matCellDef="let weatherforecast">{{weatherforecast.temperatureF}}</td>
+      </ng-container>
+      <ng-container matColumnDef="summary">
+        <th mat-header-cell *matHeaderCellDef> Summary </th>
+        <td mat-cell *matCellDef="let weatherforecast">{{weatherforecast.summary}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="mat-elevation-z8">
+    <h2>WeatherForecastFree</h2>
+    <table mat-table [dataSource]="weatherforecastsFree">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let weatherforecastFree">{{weatherforecastFree.date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="temperatureC">
+        <th mat-header-cell *matHeaderCellDef> Temperature in C° </th>
+        <td mat-cell *matCellDef="let weatherforecastFree">{{weatherforecastFree.temperatureC}}</td>
+      </ng-container>
+      <ng-container matColumnDef="temperatureF">
+        <th mat-header-cell *matHeaderCellDef> Temperature in F° </th>
+        <td mat-cell *matCellDef="let weatherforecastFree">{{weatherforecastFree.temperatureF}}</td>
+      </ng-container>
+      <ng-container matColumnDef="summary">
+        <th mat-header-cell *matHeaderCellDef> Summary </th>
+        <td mat-cell *matCellDef="let weatherforecastFree">{{weatherforecastFree.summary}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="mat-elevation-z8">
+    <h2>WeatherForecastAdministrator</h2>
+    <table mat-table [dataSource]="weatherforecastsAdministrator">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let weatherforecastAdministrator">{{weatherforecastAdministrator.date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="temperatureC">
+        <th mat-header-cell *matHeaderCellDef> Temperature in C° </th>
+        <td mat-cell *matCellDef="let weatherforecastAdministrator">{{weatherforecastAdministrator.temperatureC}}</td>
+      </ng-container>
+      <ng-container matColumnDef="temperatureF">
+        <th mat-header-cell *matHeaderCellDef> Temperature in F° </th>
+        <td mat-cell *matCellDef="let weatherforecastAdministrator">{{weatherforecastAdministrator.temperatureF}}</td>
+      </ng-container>
+      <ng-container matColumnDef="summary">
+        <th mat-header-cell *matHeaderCellDef> Summary </th>
+        <td mat-cell *matCellDef="let weatherforecastAdministrator">{{weatherforecastAdministrator.summary}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</mat-card>
