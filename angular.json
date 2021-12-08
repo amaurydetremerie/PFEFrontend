@@ -24,7 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.svg",
+              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
@@ -88,7 +88,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.svg",
+              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
@@ -128,6 +128,6 @@
   },
   "defaultProject": "angular11-sample-app",
   "cli": {
-    "analytics": "8982178c-81be-4e9a-ad76-993f987ce953"
+    "analytics": "0e0a6144-4225-49c2-a182-6fbe7567b1e6"
   }
 }
