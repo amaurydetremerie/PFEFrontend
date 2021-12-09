@@ -1,4 +1,62 @@
+@import url("https://use.fontawesome.com/releases/v5.14.0/css/all.css");
 .card-section {
-    margin: 10%;
-    padding: 5%;
+  margin: 10%;
+  padding: 5%;
+}
+
+.social-link {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.social-link:hover,
+.social-link:focus {
+  background: #ddd;
+  text-decoration: none;
+  color: #ddd;
+}
+
+a.btn-light {
+  background-color: #058aae;
+  color: white;
+}
+
+li {
+  font-size: larger;
+  margin-top: 5px;
+}
+
+#eco {
+  background-color: #82b00f;
+  color: white;
+}
+
+.list-group-item {
+  position: relative;
+  font-size: 20px;
+  text-align: center;
+  color: #6c757d;
+  font-family: "Roboto", sans-serif;
+}
+
+.list-checkmarks {
+  padding-left: 1.5rem;
+}
+.list-checkmarks li {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }

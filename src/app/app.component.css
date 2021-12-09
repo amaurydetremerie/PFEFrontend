@@ -2,6 +2,11 @@
   flex: 1 1 auto;
 }
 
+.mat-toolbar.mat-primary {
+  background: #058aae;
+  color: #fff;
+}
+
 a.title {
   color: white;
 }
@@ -10,4 +15,11 @@ a.title {
   font-size: small;
   text-align: center;
   flex: 1 1 auto;
+}
+
+.btn-login {
+  width: fit-content;
+  background-size: contain;
+  cursor: pointer;
+  display: inline-block;
 }
