@@ -1,13 +1,28 @@
 <mat-toolbar color="primary">
+  <img id="logoVinci" src="../assets/LogoVinciMarket.svg" alt="" />
   <a class="title" [routerLink]="['/']">{{ title }}</a>
 
   <div class="toolbar-spacer"></div>
-  <button mat-raised-button *ngIf="loggedIn" [routerLink]="['weatherforecast-view']">List</button>
-  <button mat-raised-button *ngIf="!loggedIn" (click)="login()">Login</button>
-  <button mat-raised-button *ngIf="loggedIn" color="warn" (click)="logout()">Logout</button>
+
+  <button
+    mat-raised-button
+    *ngIf="loggedIn"
+    [routerLink]="['weatherforecast-view']"
+  >
+    List
+  </button>
+  <button
+    class="btn-login"
+    mat-raised-button
+    *ngIf="!loggedIn"
+    (click)="login()"
+  >
+    Se connecter avec Azure
+  </button>
+  <button mat-raised-button *ngIf="loggedIn" color="warn" (click)="logout()">
+    Se déconnecter
+  </button>
 </mat-toolbar>
 
-<div class="container">
-  <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
-  <router-outlet *ngIf="!isIframe"></router-outlet>
-</div>
+<!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+<router-outlet *ngIf="!isIframe"></router-outlet>

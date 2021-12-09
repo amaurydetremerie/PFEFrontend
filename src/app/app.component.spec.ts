@@ -1,8 +1,18 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { MSAL_INSTANCE, MSAL_GUARD_CONFIG, MsalGuardConfiguration, MsalService, MsalBroadcastService } from '@azure/msal-angular';
-import { IPublicClientApplication, PublicClientApplication, InteractionType } from '@azure/msal-browser';
+import {
+  MSAL_INSTANCE,
+  MSAL_GUARD_CONFIG,
+  MsalGuardConfiguration,
+  MsalService,
+  MsalBroadcastService,
+} from '@azure/msal-angular';
+import {
+  IPublicClientApplication,
+  PublicClientApplication,
+  InteractionType,
+} from '@azure/msal-browser';
 
 import * as auth from './auth-config.json';
 
@@ -10,9 +20,10 @@ function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
       clientId: auth.credentials.clientId,
-      authority: 'https://login.microsoftonline.com/' + auth.credentials.tenantId,
-      redirectUri: auth.configuration.redirectUri
-    }
+      authority:
+        'https://login.microsoftonline.com/' + auth.credentials.tenantId,
+      redirectUri: auth.configuration.redirectUri,
+    },
   });
 }
 
@@ -23,24 +34,20 @@ function MSALGuardConfigFactory(): MsalGuardConfiguration {
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [RouterTestingModule],
+      declarations: [AppComponent],
       providers: [
         MsalService,
         MsalBroadcastService,
         {
           provide: MSAL_INSTANCE,
-          useFactory: MSALInstanceFactory
+          useFactory: MSALInstanceFactory,
         },
         {
           provide: MSAL_GUARD_CONFIG,
-          useFactory: MSALGuardConfigFactory
+          useFactory: MSALGuardConfigFactory,
         },
-      ]
+      ],
     }).compileComponents();
   }));
 
@@ -60,6 +67,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.title').textContent).toContain('Microsoft identity platform');
+    expect(compiled.querySelector('.title').textContent).toContain(
+      'Microsoft identity platform'
+    );
   });
 });
