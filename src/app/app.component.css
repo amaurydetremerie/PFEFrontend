@@ -23,3 +23,9 @@ a.title {
   cursor: pointer;
   display: inline-block;
 }
+
+#logoVinci {
+  background-color: white;
+  height: 65px;
+  margin-right: 20px;
+}

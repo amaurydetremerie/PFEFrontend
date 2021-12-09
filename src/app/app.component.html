@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
+  <img id="logoVinci" src="../assets/LogoVinciMarket.svg" alt="" />
   <a class="title" [routerLink]="['/']">{{ title }}</a>
 
   <div class="toolbar-spacer"></div>
+
   <button
     mat-raised-button
     *ngIf="loggedIn"
@@ -15,10 +17,10 @@
     *ngIf="!loggedIn"
     (click)="login()"
   >
-    Login
+    Se connecter avec Azure
   </button>
   <button mat-raised-button *ngIf="loggedIn" color="warn" (click)="logout()">
-    Logout
+    Se déconnecter
   </button>
 </mat-toolbar>
 

@@ -1,16 +1,27 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
-import { EventMessage, EventType, InteractionType, PopupRequest, RedirectRequest } from '@azure/msal-browser';
+import {
+  MsalService,
+  MsalBroadcastService,
+  MSAL_GUARD_CONFIG,
+  MsalGuardConfiguration,
+} from '@azure/msal-angular';
+import {
+  EventMessage,
+  EventType,
+  InteractionType,
+  PopupRequest,
+  RedirectRequest,
+} from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Microsoft identity platform';
+  title = 'VinciMarket';
   isIframe = false;
   loggedIn = false;
   private readonly _destroying$ = new Subject<void>();
@@ -32,7 +43,11 @@ export class AppComponent implements OnInit, OnDestroy {
      */
     this.msalBroadcastService.msalSubject$
       .pipe(
-        filter((msg: EventMessage) => msg.eventType === EventType.LOGIN_SUCCESS || msg.eventType === EventType.ACQUIRE_TOKEN_SUCCESS),
+        filter(
+          (msg: EventMessage) =>
+            msg.eventType === EventType.LOGIN_SUCCESS ||
+            msg.eventType === EventType.ACQUIRE_TOKEN_SUCCESS
+        ),
         takeUntil(this._destroying$)
       )
       .subscribe((result) => {
@@ -46,16 +61,18 @@ export class AppComponent implements OnInit, OnDestroy {
 
   login() {
     if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
-      if (this.msalGuardConfig.authRequest){
-        this.authService.loginPopup({...this.msalGuardConfig.authRequest} as PopupRequest)
+      if (this.msalGuardConfig.authRequest) {
+        this.authService
+          .loginPopup({ ...this.msalGuardConfig.authRequest } as PopupRequest)
           .subscribe(() => this.checkAccount());
-        } else {
-          this.authService.loginPopup()
-            .subscribe(() => this.checkAccount());
+      } else {
+        this.authService.loginPopup().subscribe(() => this.checkAccount());
       }
     } else {
-      if (this.msalGuardConfig.authRequest){
-        this.authService.loginRedirect({...this.msalGuardConfig.authRequest} as RedirectRequest);
+      if (this.msalGuardConfig.authRequest) {
+        this.authService.loginRedirect({
+          ...this.msalGuardConfig.authRequest,
+        } as RedirectRequest);
       } else {
         this.authService.loginRedirect();
       }
