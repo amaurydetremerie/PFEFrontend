@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Weatherforecast } from './weatherforecast';
-import * as auth from './auth-config.json';
+import { Weatherforecast } from '../models/weatherforecast';
+import * as auth from '../app/auth-config.json';
 
 @Injectable({
   providedIn: 'root'

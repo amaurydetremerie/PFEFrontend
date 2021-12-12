@@ -5,12 +5,17 @@
   <div class="toolbar-spacer"></div>
 
   <button
-    mat-raised-button
-    *ngIf="loggedIn"
-    [routerLink]="['weatherforecast-view']"
-  >
-    List
+  mat-raised-button
+  *ngIf="loggedIn"
+  [routerLink]="['weatherforecast-view']"
+>
+  List
+</button>
+
+  <button mat-raised-button *ngIf="loggedIn" [routerLink]="['categories']">
+    Categories
   </button>
+  
   <button
     class="btn-login"
     mat-raised-button
