@@ -4,6 +4,9 @@ import { MsalGuard } from '@azure/msal-angular';
 
 import { HomeComponent } from './home/home.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+
 
 /**
  * MSAL Angular can protect routes in your application
@@ -31,6 +34,20 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path:'categories',
+    component: CategoryComponent,
+    canActivate: [
+      MsalGuard
+    ]
+  },
+  {
+    path:'addCategory',
+    component: AddCategoryComponent,
+    canActivate: [
+      MsalGuard
+    ]
   }
 ];
 

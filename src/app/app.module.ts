@@ -18,12 +18,15 @@ import { IPublicClientApplication, PublicClientApplication, InteractionType, Bro
 import { MsalGuard, MsalInterceptor, MsalBroadcastService, MsalInterceptorConfiguration, MsalModule, MsalService, MSAL_GUARD_CONFIG, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
 
 import { AppRoutingModule } from './app-routing.module';
-import { WeatherforecastService } from './weatherforecast.service';
+import { WeatherforecastService } from '../services/weatherforecast.service';
+import { CategoryService } from '../services/category.service'
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
 
 import * as auth from './auth-config.json';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
 
@@ -73,7 +76,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   declarations: [
     AppComponent,
     HomeComponent,
-    WeatherforecastViewComponent
+    WeatherforecastViewComponent,
+    CategoryComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +119,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalGuard,
     MsalBroadcastService,
     WeatherforecastService,
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })
