@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { HomeComponent } from './home/home.component';
+import { MemberComponent } from './member/member.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
+import {InsertOfferComponent} from './insertOffer/insertOffer.component';
+import {InsertOfferFormComponent} from './insertOfferForm/insertOfferForm.component';
 
 /**
  * MSAL Angular can protect routes in your application
@@ -14,6 +17,13 @@ const routes: Routes = [
   {
     path: 'weatherforecast-view',
     component: WeatherforecastViewComponent,
+    canActivate: [
+      MsalGuard
+    ]
+  },
+  {
+    path: 'member-view',
+    component: MemberComponent,
     canActivate: [
       MsalGuard
     ]
@@ -31,6 +41,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'insertOffer',
+    component: InsertOfferComponent
+  },
+  {
+    path: 'insertOfferForm',
+    component: InsertOfferFormComponent
   }
 ];
 

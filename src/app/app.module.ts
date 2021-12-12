@@ -8,10 +8,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { IPublicClientApplication, PublicClientApplication, InteractionType, BrowserCacheLocation } from '@azure/msal-browser';
@@ -21,11 +22,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { WeatherforecastService } from './weatherforecast.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { MemberComponent } from './member/member.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
 
 import * as auth from './auth-config.json';
+import {InsertOfferComponent} from './insertOffer/insertOffer.component';
+import {InsertOfferFormComponent} from './insertOfferForm/insertOfferForm.component';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {ToastrModule} from 'ngx-toastr';
 
-const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 
 /**
@@ -54,6 +61,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
   protectedResourceMap.set(auth.resources.todoListApi.resourceUri, auth.resources.todoListApi.resourceScopes);
+  protectedResourceMap.set('https://graph.microsoft.com/v1.0', ['user.read', ]);
 
   return {
     interactionType: InteractionType.Redirect,
@@ -73,7 +81,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   declarations: [
     AppComponent,
     HomeComponent,
-    WeatherforecastViewComponent
+    MemberComponent,
+    InsertOfferComponent,
+    InsertOfferFormComponent,
+    WeatherforecastViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +102,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatFormFieldModule,
     MatCheckboxModule,
     MatIconModule,
+    MatOptionModule,
+    MatSelectModule,
+    ToastrModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [
     {
