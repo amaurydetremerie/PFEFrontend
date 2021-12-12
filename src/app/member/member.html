@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table mdbTable>
+  <thead>
+  <tr>
+    <th scope="col">Membres </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr mdbTableCol *ngFor="let profiles of allProfile">
+    <th scope="row">{{profiles?.givenName}}</th>
+    <td>{{profiles?.surname}}</td>
+    <td>{{profiles?.userPrincipalName}}</td>
+    <td>{{profiles?.mail}}</td>
+    <form #form="ngForm" (submit)="onSubmit(form)">
+    <td><button type="submit" >Bannir</button></td>
+    </form>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
