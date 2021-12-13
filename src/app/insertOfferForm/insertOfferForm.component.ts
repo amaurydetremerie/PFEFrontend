@@ -4,13 +4,24 @@ import {InsertOfferService} from '../home/shared/insertOffer.service';
 import {UploadFilesService} from '../home/shared/image.service';
 import {any} from 'codelyzer/util/function';
 import {Observable} from 'rxjs';
-import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpEventType, HttpResponse} from '@angular/common/http';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ImageVideoModel} from '../home/shared/imageVideo.model';
 import {ImageVideoService} from '../home/shared/imageVideo.service';
+import {MsalService} from '@azure/msal-angular';
+import {CategoryService} from '../home/shared/category.service';
+import {CategoryModel} from '../home/shared/category.model';
 
+// const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+
+/* type ProfileType = {
+  givenName?: string,
+  surname?: string,
+  userPrincipalName?: string,
+  id?: string
+}; */
 
 @Component({
   selector: 'app-insert-offer-form',
@@ -19,12 +30,18 @@ import {ImageVideoService} from '../home/shared/imageVideo.service';
 })
 export class InsertOfferFormComponent implements OnInit {
 
+  // profile!: ProfileType;
+  // @ts-ignore
+  categories!: CategoryModel[];
+  categoriesChild!: CategoryModel[];
+
   // video
   title = 'fileupload';
   remark = '';
 
   constructor(public service: InsertOfferService, public serviceImage: UploadFilesService, private toastr: ToastrService,
-              public serviceVideo: ImageVideoService) {
+              // tslint:disable-next-line:max-line-length
+              public serviceVideo: ImageVideoService /*private authService: MsalService, private http: HttpClient */, public serviceCategory: CategoryService) {
   }
 
   // image
@@ -130,8 +147,42 @@ export class InsertOfferFormComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('tesfgrgbf');
+    // @ts-ignore
+    this.getAllCategories();
     /* this.fileInfos = this.serviceImage.getFiles(); */
     /* this.getvideos(); */
+    /*  this.authService.instance.acquireTokenSilent({
+    scopes: ['user.read'],
+    account: this.authService.instance.getAllAccounts()[0]
+  }).then(result => {
+    console.log(result);
+    this.http.get(GRAPH_ENDPOINT, {
+      headers: {
+        Authorisation: ['Bearer ' + result.idToken]
+      }
+    }).subscribe(profile => {
+      console.log(profile);
+      // @ts-ignore
+      this.profile = profile;
+    });
+  });
+  */
+  }
+
+  getAllCategories(): void {
+    this.serviceCategory.getAllCategories()
+      .subscribe((categories: CategoryModel[]) => {
+        this.categories = categories;
+      });
+  }
+
+  goToChilds(id: string): void {
+    // tslint:disable-next-line:radix
+    const parentId = parseInt(id);
+    this.serviceCategory.getChildsCategory(parentId)
+      .subscribe((categories: CategoryModel[]) => {
+        this.categoriesChild = categories;
+      });
   }
 
   // tslint:disable-next-line:typedef

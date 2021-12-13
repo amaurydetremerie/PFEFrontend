@@ -8,7 +8,9 @@ export class InsertOfferModel {
   place: Places = Places.Woluwe;
   price = 0;
   seller = '';
-  categoryId = 0;
+  SellerEmail = '';
+  countReport = 0;
+  categoryId ?= 0 ;
 }
 
 export enum States {

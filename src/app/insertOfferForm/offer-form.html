@@ -5,8 +5,8 @@
       <div class="col">
         <div class="form-outline">
           <label class="form-label">Titre</label>
-          <input type="text" class="form-control form-control-lg" placeholder="Titre" name="titre"
-                 #titre="ngModel" [(ngModel)]="service.formData.title">
+          <input type="text" class="form-control form-control-lg" placeholder="" name="title"
+                 #title="ngModel" [(ngModel)]="service.formData.title">
         </div>
       </div>
     </div>
@@ -14,8 +14,8 @@
     <div>
       <div class="form-outline">
         <label class="form-label">Description</label>
-        <textarea rows="4" style="width: 500px;" cols="30" class="form-control form-control-lg" placeholder="description" name="description"
-                  #description="ngModel" [(ngModel)]="service.formData.description"></textarea>
+        <input type="text" class="form-control form-control-lg" placeholder="" name="description"
+               #description="ngModel" [(ngModel)]="service.formData.description">
       </div>
     </div>
   </div>
@@ -23,80 +23,34 @@
 
   <div class="form-group">
     <label>Prix</label>
-    <input type="number" class="form-control form-control-lg" placeholder="prix" name="price"
+    <input type="number" class="form-control form-control-lg" placeholder="" name="price"
            #price="ngModel" [(ngModel)]="service.formData.price">
   </div>
 
   <div class="form-group">
     <label>Statut</label>
-    <select class="form-control">
-      <option name="aVendre" ngDefaultControl #aVendre="ngModel" [(ngModel)]="service.formData.Type">A vendre</option>
-      <option name="aDonner" ngDefaultControl #aDonner="ngModel" [(ngModel)]="service.formData.Type">A donner</option>
+    <select class="form-select">
+      <option name="aVendre" ngDefaultControl #aVendre="ngModel"
+              [(ngModel)]="service.formData.Type" [value]="service.state.Sell">A vendre
+      </option>
+      <option name="aDonner" ngDefaultControl #aDonner="ngModel"
+              [(ngModel)]="service.formData.Type" [value]="service.state.Published">A donner
+      </option>
     </select>
-    <!-- <option value="aVendre">A vendre</option>
-     <option value="aDonner">A donner</option> !-->
   </div>
-
-  <!--
-      <div class="row">
-        <div class="col-8">
-          <label class="btn btn-default p-0">
-            <input type="file" (change)="selectFile($event)"/>
-          </label>
-        </div>
-
-        <div class="col-4">
-          <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
-            Upload
-          </button>
-        </div>
-      </div>
-
-      <div *ngIf="currentFile" class="progress my-3">
-        <div
-          class="progress-bar progress-bar-info progress-bar-striped"
-          role="progressbar"
-          attr.aria-valuenow="{{ progress }}"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          [ngStyle]="{ width: progress + '%' }"
-        >
-          {{ progress }}%
-        </div>
-      </div>
-
-      <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
-
-      <div class="card mt-3">
-        <div class="card-header">List of Files</div>
-        <ul
-          class="list-group list-group-flush"
-          *ngFor="let file of fileInfos | async"
-        >
-          <li class="list-group-item">
-            <a href="{{ file.url }}">{{ file.name }}</a>
-          </li>
-        </ul>
-      </div>
-  -->
-  <!--
-  <div class="form-group">
-    <label class="image-upload-container btn btn-bwm">
-      <span>Choisissez une image </span>
-      <input #imageInput
-             type="file"
-             accept="image/*"
-             (change)="processFile(imageInput)">
-    </label>
-  </div>
--->
 
   <div class="form-group">
     Campus:
-    <select class="form-control">
-      <option value="Woluwe">Woluwe</option>
-      <option value="Ixelles">Ixelles</option>
-      <option value="LLN">Louvain-La-Neuve</option>
+    <select class="form-select">
+      <option value="Woluwe" name="place" ngDefaultControl #place="ngModel"
+              [(ngModel)]="service.formData.place" [value]="service.place.Woluwe">Woluwe
+      </option>
+      <option value="Ixelles" name="place" ngDefaultControl #place="ngModel"
+              [(ngModel)]="service.formData.place" [value]="service.place.Ixelles">Ixelles
+      </option>
+      <option value="LLN" name="place" ngDefaultControl #place="ngModel"
+              [(ngModel)]="service.formData.place" [value]="service.place.Louvain">Louvain-La-Neuve
+      </option>
     </select></div>
 
 
@@ -123,6 +77,8 @@
 
   <!-- Video -->
 
+  Video
+
   <div class="form-group">
     <ng-container>
       <input type="file" id="fileVideo" multiple (change)="getFileDetails($event)">
@@ -137,8 +93,78 @@
 
   <!--  -->
 
+  <!-- <select >
+   <option>{{profile?.surname}}</option>
+   <option>{{profile?.givenName}}</option>
+ </select> -->
+
+
+  <select *ngFor="let category of categories">
+    <option *ngIf="goToChilds(category.id)">
+      <select *ngFor="let childCategory of categoriesChild">
+        {{childCategory?.id}}
+      </select>
+    </option>
+    <option>{{category?.id}}</option>
+    <option>{{category?.name}}</option>
+  </select>
+
 
   <div class="form-group">
     <button class="button.btn.btn-info.btn-lg.btn-block" type="submit">Confirmer</button>
   </div>
 </form>
+
+<!--
+    <div class="row">
+      <div class="col-8">
+        <label class="btn btn-default p-0">
+          <input type="file" (change)="selectFile($event)"/>
+        </label>
+      </div>
+
+      <div class="col-4">
+        <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+          Upload
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="currentFile" class="progress my-3">
+      <div
+        class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar"
+        attr.aria-valuenow="{{ progress }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [ngStyle]="{ width: progress + '%' }"
+      >
+        {{ progress }}%
+      </div>
+    </div>
+
+    <div *ngIf="message" class="alert alert-secondary" role="alert">{{ message }}</div>
+
+    <div class="card mt-3">
+      <div class="card-header">List of Files</div>
+      <ul
+        class="list-group list-group-flush"
+        *ngFor="let file of fileInfos | async"
+      >
+        <li class="list-group-item">
+          <a href="{{ file.url }}">{{ file.name }}</a>
+        </li>
+      </ul>
+    </div>
+-->
+<!--
+<div class="form-group">
+  <label class="image-upload-container btn btn-bwm">
+    <span>Choisissez une image </span>
+    <input #imageInput
+           type="file"
+           accept="image/*"
+           (change)="processFile(imageInput)">
+  </label>
+</div>
+-->
