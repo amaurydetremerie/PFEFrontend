@@ -5,6 +5,8 @@ import { MsalGuard } from '@azure/msal-angular';
 import { HomeComponent } from './home/home.component';
 import { OffersComponent } from './offers/offers.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 /**
  * MSAL Angular can protect routes in your application
@@ -35,6 +37,17 @@ const routes: Routes = [
     // Needed for hash routing
     path: 'offers',
     component: OffersComponent,
+    canActivate: [MsalGuard],
+  },
+
+  {
+    path: 'categories',
+    component: CategoryComponent,
+    canActivate: [MsalGuard],
+  },
+  {
+    path: 'addCategory',
+    component: AddCategoryComponent,
     canActivate: [MsalGuard],
   },
 ];

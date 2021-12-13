@@ -34,14 +34,17 @@ import {
 } from '@azure/msal-angular';
 
 import { AppRoutingModule } from './app-routing.module';
-import { WeatherforecastService } from './weatherforecast.service';
+import { WeatherforecastService } from '../services/weatherforecast.service';
+import { CategoryService } from '../services/category.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { OffersComponent } from './offers/offers.component';
+import { OffersComponent } from '../app/offers/offers.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
 
 import * as auth from './auth-config.json';
-import { OffersService } from './shared/offers.service';
+import { OffersService } from '../app/shared/offers.service';
+import { CategoryComponent } from './category/category.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 const isIE =
   window.navigator.userAgent.indexOf('MSIE ') > -1 ||
@@ -98,6 +101,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HomeComponent,
     WeatherforecastViewComponent,
     OffersComponent,
+    CategoryComponent,
+    AddCategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -139,6 +144,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalBroadcastService,
     WeatherforecastService,
     OffersService,
+    CategoryService,
   ],
   bootstrap: [AppComponent],
 })
