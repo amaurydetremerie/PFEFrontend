@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import {Component, OnInit, Inject, OnDestroy, Injectable} from '@angular/core';
 import {
   MsalService,
   MsalBroadcastService,
@@ -6,6 +6,7 @@ import {
   MsalGuardConfiguration,
 } from '@azure/msal-angular';
 import {
+  AuthenticationResult,
   EventMessage,
   EventType,
   InteractionType,
@@ -14,6 +15,11 @@ import {
 } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import {userService} from './home/shared/user.service';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-root',
@@ -24,12 +30,14 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'VinciMarket';
   isIframe = false;
   loggedIn = false;
+  // tslint:disable-next-line:variable-name
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private authService: MsalService,
-    private msalBroadcastService: MsalBroadcastService
+    private msalBroadcastService: MsalBroadcastService,
+    private userservice: userService
   ) {}
 
   ngOnInit(): void {
@@ -55,18 +63,27 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
+  // tslint:disable-next-line:typedef
   checkAccount() {
     this.loggedIn = this.authService.instance.getAllAccounts().length > 0;
   }
 
+  // tslint:disable-next-line:typedef
   login() {
     if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
       if (this.msalGuardConfig.authRequest) {
         this.authService
           .loginPopup({ ...this.msalGuardConfig.authRequest } as PopupRequest)
-          .subscribe(() => this.checkAccount());
+          .subscribe((response: AuthenticationResult) => {
+            this.authService.instance.setActiveAccount(response.account);
+            this.userservice.user = response.account;
+            this.checkAccount();
+          });
       } else {
-        this.authService.loginPopup().subscribe(() => this.checkAccount());
+        this.authService.loginPopup().subscribe((response: AuthenticationResult) => {
+          this.authService.instance.setActiveAccount(response.account);
+          this.checkAccount();
+        });
       }
     } else {
       if (this.msalGuardConfig.authRequest) {
@@ -79,6 +96,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  // tslint:disable-next-line:typedef
   logout() {
     this.authService.logout();
   }

@@ -1,16 +1,25 @@
-<form #form="ngForm" (submit)="onSubmit(form)">
-  <input type="hidden" name="">
-  <div class="form-group">
-    <label>Titre</label>
-    <input type="text" class="form-control form-control-lg" placeholder="Titre" name="titre"
-           #titre="ngModel" [(ngModel)]="service.formData.title">
-  </div>
+<form #form="ngForm" (submit)="onSubmit(form)" class="form">
 
   <div class="form-group">
-    <label>Description</label>
-    <input type="text" class="form-control form-control-lg" placeholder="description" name="description"
-           #description="ngModel" [(ngModel)]="service.formData.description">
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <label class="form-label">Titre</label>
+          <input type="text" class="form-control form-control-lg" placeholder="Titre" name="titre"
+                 #titre="ngModel" [(ngModel)]="service.formData.title">
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="form-outline">
+        <label class="form-label">Description</label>
+        <textarea rows="4" style="width: 500px;" cols="30" class="form-control form-control-lg" placeholder="description" name="description"
+                  #description="ngModel" [(ngModel)]="service.formData.description"></textarea>
+      </div>
+    </div>
   </div>
+
 
   <div class="form-group">
     <label>Prix</label>
@@ -82,13 +91,14 @@
   </div>
 -->
 
-  <!--Campus:
-  <select class="form-control">
-    <option value="Woluwe">Woluwe</option>
-    <option value="Ixelles">Ixelles</option>
-    <option value="LLN">Louvain-La-Neuve</option>
-  </select> <br>
-  <br>-->
+  <div class="form-group">
+    Campus:
+    <select class="form-control">
+      <option value="Woluwe">Woluwe</option>
+      <option value="Ixelles">Ixelles</option>
+      <option value="LLN">Louvain-La-Neuve</option>
+    </select></div>
+
 
   <!--image -->
 
@@ -114,17 +124,15 @@
   <!-- Video -->
 
   <div class="form-group">
-    <div class="col-sm-10">
-      <ng-container>
-        <input type="file" id="fileVideo" multiple (change)="getFileDetails($event)">
-        <!--  <button class="btn btn-primary" (click)="uploadFiles()">Upload</button> -->
-      </ng-container>
-    </div>
-    <div class="col-sm-10" *ngFor="let Video of myVideos | async; let i=index">
-      <video width="270" height="220" controls disabled="true" (click)="toggleVideo()" #videoPlayer>
-        <source [src]="Video.path" type="video/mp4">
-      </video>
-    </div>
+    <ng-container>
+      <input type="file" id="fileVideo" multiple (change)="getFileDetails($event)">
+      <!--  <button class="btn btn-primary" (click)="uploadFiles()">Upload</button> -->
+    </ng-container>
+  </div>
+  <div class="col-sm-10" *ngFor="let Video of myVideos | async; let i=index">
+    <video width="270" height="220" controls disabled="true" (click)="toggleVideo()" #videoPlayer>
+      <source [src]="Video.path" type="video/mp4">
+    </video>
   </div>
 
   <!--  -->

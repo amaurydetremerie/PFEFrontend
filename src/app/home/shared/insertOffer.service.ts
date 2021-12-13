@@ -16,7 +16,7 @@ export class InsertOfferService {
 
   // tslint:disable-next-line:typedef
   postFormOffer() {
-    return this.http.post(this.baseURL, this.baseURL);
+    return this.http.post(this.baseURL, this.formData);
   }
 
   // tslint:disable-next-line:typedef

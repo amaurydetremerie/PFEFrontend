@@ -15,7 +15,7 @@ import {ImageVideoService} from '../home/shared/imageVideo.service';
 @Component({
   selector: 'app-insert-offer-form',
   templateUrl: './offer-form.html',
-  styles: []
+  styleUrls: ['./offer.component.scss'],
 })
 export class InsertOfferFormComponent implements OnInit {
 

@@ -5,24 +5,23 @@
   <title>Title</title>
 </head>
 <body>
-<table mdbTable>
+<table class="table caption-top">
+  <caption>Liste des membres</caption>
   <thead>
   <tr>
-    <th scope="col">Membres </th>
+    <th scope="col">Prénom</th>
+    <th scope="col">Nom</th>
+    <th scope="col">Mail</th>
   </tr>
   </thead>
   <tbody>
   <tr mdbTableCol *ngFor="let profiles of allProfile">
-    <th scope="row">{{profiles?.givenName}}</th>
+    <td scope="row">{{profiles?.givenName}}</td>
     <td>{{profiles?.surname}}</td>
     <td>{{profiles?.userPrincipalName}}</td>
-    <td>{{profiles?.mail}}</td>
-    <form #form="ngForm" (submit)="onSubmit(form)">
-    <td><button type="submit" >Bannir</button></td>
-    </form>
+    <td><button type="submit" (click)="ban(profiles?.id)">Bannir</button></td>
   </tr>
   </tbody>
 </table>
-
 </body>
 </html>
