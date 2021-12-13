@@ -9,7 +9,7 @@
   },
   "resources": {
     "todoListApi": {
-      "resourceUri": "https://pfebackend.azurewebsites.net",
+      "resourceUri": "https://localhost:7252",
       "resourceScopes": ["https://pfebackend.azurewebsites.net/access_as_user"]
     }
   }

@@ -11,6 +11,11 @@
   >
     List
   </button>
+
+  <button mat-raised-button *ngIf="loggedIn" [routerLink]="['offers']">
+    Offers
+  </button>
+
   <button
     class="btn-login"
     mat-raised-button
