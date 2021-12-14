@@ -20,7 +20,7 @@ export class CategoryService {
 
   // tslint:disable-next-line:typedef
   getAllCategories() {
-    return this.http.get<CategoryModel[]>(this.url + '/categories');
+    return this.http.get<CategoryModel[]>(this.url + '/categories/parents');
   }
 
 

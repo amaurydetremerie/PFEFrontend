@@ -1,21 +1,21 @@
 export class InsertOfferModel {
   id = 0;
-  Type: Types = Types.Give;
+  type: Types = Types.Give;
   state: States = States.Published;
-  title = '';
+  Title = '';
   deleted = false;
   description = '';
   place: Places = Places.Woluwe;
   price = 0;
   seller = '';
-  SellerEmail = '';
+  sellerEMail = '';
   countReport = 0;
-  categoryId ?= 0 ;
+  categoryId ?= 0;
 }
 
 export enum States {
   Published,
-  Sell,
+  Sold,
   Invisible
 }
 

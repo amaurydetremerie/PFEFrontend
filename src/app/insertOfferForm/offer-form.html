@@ -1,12 +1,13 @@
 <form #form="ngForm" (submit)="onSubmit(form)" class="form">
 
+
   <div class="form-group">
     <div class="row mb-4">
       <div class="col">
         <div class="form-outline">
           <label class="form-label">Titre</label>
-          <input type="text" class="form-control form-control-lg" placeholder="" name="title"
-                 #title="ngModel" [(ngModel)]="service.formData.title">
+          <input type="text" class="form-control form-control-lg" placeholder="" name="title" required
+                 #title="ngModel" [(ngModel)]="service.formData.Title">
         </div>
       </div>
     </div>
@@ -27,14 +28,14 @@
            #price="ngModel" [(ngModel)]="service.formData.price">
   </div>
 
-  <div class="form-group">
+ /* <div class="form-group">
     <label>Statut</label>
     <select class="form-select">
       <option name="aVendre" ngDefaultControl #aVendre="ngModel"
-              [(ngModel)]="service.formData.Type" [value]="service.state.Sell">A vendre
+              [(ngModel)]="service.formData.type" [value]="service.state.Sold">A vendre
       </option>
       <option name="aDonner" ngDefaultControl #aDonner="ngModel"
-              [(ngModel)]="service.formData.Type" [value]="service.state.Published">A donner
+              [(ngModel)]="service.formData.type" [value]="service.state.Published">A donner
       </option>
     </select>
   </div>

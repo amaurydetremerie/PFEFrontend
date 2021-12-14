@@ -2,26 +2,15 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {InsertOfferModel} from '../home/shared/insertOffer.model';
 import {InsertOfferService} from '../home/shared/insertOffer.service';
 import {UploadFilesService} from '../home/shared/image.service';
-import {any} from 'codelyzer/util/function';
 import {Observable} from 'rxjs';
-import {HttpClient, HttpEventType, HttpResponse} from '@angular/common/http';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {ReactiveFormsModule} from '@angular/forms';
 import {ImageVideoModel} from '../home/shared/imageVideo.model';
 import {ImageVideoService} from '../home/shared/imageVideo.service';
-import {MsalService} from '@azure/msal-angular';
 import {CategoryService} from '../home/shared/category.service';
 import {CategoryModel} from '../home/shared/category.model';
 
-// const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
-/* type ProfileType = {
-  givenName?: string,
-  surname?: string,
-  userPrincipalName?: string,
-  id?: string
-}; */
 
 @Component({
   selector: 'app-insert-offer-form',
@@ -30,7 +19,7 @@ import {CategoryModel} from '../home/shared/category.model';
 })
 export class InsertOfferFormComponent implements OnInit {
 
-  // profile!: ProfileType;
+
   // @ts-ignore
   categories!: CategoryModel[];
   categoriesChild!: CategoryModel[];
@@ -40,15 +29,17 @@ export class InsertOfferFormComponent implements OnInit {
   remark = '';
 
   constructor(public service: InsertOfferService, public serviceImage: UploadFilesService, private toastr: ToastrService,
-              // tslint:disable-next-line:max-line-length
-              public serviceVideo: ImageVideoService /*private authService: MsalService, private http: HttpClient */, public serviceCategory: CategoryService) {
+              public serviceVideo: ImageVideoService, public serviceCategory: CategoryService) {
   }
-
   // image
   // tslint:disable-next-line:typedef
   get f() {
     return this.myForm.controls;
   }
+
+   // @ts-ignore
+  frmDataImage = new FormData();
+  frmDataVideo = new FormData();
 
 
   // image
@@ -66,6 +57,13 @@ export class InsertOfferFormComponent implements OnInit {
 
   sMsg = '';
 
+  ngOnInit(): void {
+    console.log('tesfgrgbf');
+    // @ts-ignore
+    // this.getAllCategories();
+  }
+
+
   // image
 
   // tslint:disable-next-line:typedef
@@ -77,7 +75,6 @@ export class InsertOfferFormComponent implements OnInit {
       const filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
         const reader = new FileReader();
-
         // tslint:disable-next-line:no-shadowed-variable
         reader.onload = (event: any) => {
           console.log(event.target.result);
@@ -128,10 +125,26 @@ export class InsertOfferFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   uploadFiles() {
-    const frmData = new FormData();
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.myFiles.length; i++) {
-      frmData.append('fileUpload', this.myFiles[i]);
+      this.frmDataVideo.append('fileUpload', this.myFiles[i]);
+    }
+    // @ts-ignore
+    // @ts-ignore
+    this.serviceVideo.postImageVideo('http://localhost:50401/api/FileUpload/UploadFiles', frmDataVideo).subscribe(
+      data => {
+        // SHOW A MESSAGE RECEIVED FROM THE WEB API.
+        this.sMsg = data as string;
+        console.log(this.sMsg);
+      }
+    );
+  }
+
+  // tslint:disable-next-line:typedef
+  uploadFilesImage() {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.images.length; i++) {
+      this.frmDataImage.append('fileUpload', this.images[i]);
     }
     // @ts-ignore
     // @ts-ignore
@@ -142,31 +155,6 @@ export class InsertOfferFormComponent implements OnInit {
         console.log(this.sMsg);
       }
     );
-  }
-
-
-  ngOnInit(): void {
-    console.log('tesfgrgbf');
-    // @ts-ignore
-    this.getAllCategories();
-    /* this.fileInfos = this.serviceImage.getFiles(); */
-    /* this.getvideos(); */
-    /*  this.authService.instance.acquireTokenSilent({
-    scopes: ['user.read'],
-    account: this.authService.instance.getAllAccounts()[0]
-  }).then(result => {
-    console.log(result);
-    this.http.get(GRAPH_ENDPOINT, {
-      headers: {
-        Authorisation: ['Bearer ' + result.idToken]
-      }
-    }).subscribe(profile => {
-      console.log(profile);
-      // @ts-ignore
-      this.profile = profile;
-    });
-  });
-  */
   }
 
   getAllCategories(): void {
@@ -187,7 +175,7 @@ export class InsertOfferFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit(form: NgForm) {
-    this.service.postFormOffer().subscribe(
+    this.service.postFormOffer(this.frmDataImage, this.frmDataVideo); /*.subscribe(
       res => {
         this.serviceVideo.postImageVideo();
         this.serviceImage.postImage();
@@ -195,16 +183,44 @@ export class InsertOfferFormComponent implements OnInit {
         this.toastr.success('Envoi confirmé');
       },
       err => {
-        console.log('err');
+
+        console.log(err.error);
       }
     );
+    */
   }
-
   // tslint:disable-next-line:typedef
   resetForm(form: NgForm) {
     form.form.reset();
     this.service.formData = new InsertOfferModel();
   }
-
-
 }
+
+/* this.fileInfos = this.serviceImage.getFiles(); */
+/* this.getvideos(); */
+/*  this.authService.instance.acquireTokenSilent({
+scopes: ['user.read'],
+account: this.authService.instance.getAllAccounts()[0]
+}).then(result => {
+console.log(result);
+this.http.get(GRAPH_ENDPOINT, {
+  headers: {
+    Authorisation: ['Bearer ' + result.idToken]
+  }
+}).subscribe(profile => {
+  console.log(profile);
+  // @ts-ignore
+  this.profile = profile;
+});
+});
+
+// const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+
+ type ProfileType = {
+  givenName?: string,
+  surname?: string,
+  userPrincipalName?: string,
+  id?: string
+};
+// profile!: ProfileType;
+*/
