@@ -19,6 +19,9 @@ import {HttpClient} from '@angular/common/http';
 })
 export class InsertOfferFormComponent implements OnInit {
 
+  @ViewChild('fileUpload', {static: false}) fileUpload: ElementRef | undefined;
+  files  = [];
+
 
   // @ts-ignore
   categories!: CategoryModel[];
@@ -72,17 +75,31 @@ export class InsertOfferFormComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onFileChange(event: Event) {
     // @ts-ignore
-    if (event.target.files && event.target.files[0]) {
-      // tslint:disable-next-line:prefer-const
+    // tslint:disable-next-line:prefer-for-of
+    for (let index = 0; index < event.target.files.length; index++)
+    {
       // @ts-ignore
-      const filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {
+      const file = event.target.files[index];
+      // @ts-ignore
+      this.files.push(file);
+      console.log(this.files);
+    }
+/*
+
+
+
+    // @ts-ignore
+    if (event.target.files) {
+      // @ts-ignore
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < event.target.files.length; i++) {
         const reader = new FileReader();
         // tslint:disable-next-line:no-shadowed-variable
-        reader.onload = (event: any) => {
-          console.log(event.target.result);
+        reader.onload = (e: any) => {
+          console.log(e);
+          // console.log(event.target.result);
           // @ts-ignore
-          this.images.push(event.target.result);
+          this.images.push(e.target.result);
 
           this.myForm.patchValue({
             fileSource: this.images
@@ -92,7 +109,7 @@ export class InsertOfferFormComponent implements OnInit {
         // @ts-ignore
         reader.readAsDataURL(event.target.files[i]);
       }
-    }
+    }*/
   }
 
   // video
@@ -159,9 +176,14 @@ export class InsertOfferFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit(form: NgForm) {
+    console.log(this.files);
     const formData = new FormData();
     formData.append('offerJson', JSON.stringify(this.service.formData));
-    formData.append('files', JSON.stringify(this.images));
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.files.length; i++) {
+      console.log(this.files[i]);
+      formData.append('files', this.files[i]);
+    }
     this.http.post(this.baseURL + '/offers', formData).subscribe(
       result => console.log(result));
   }
