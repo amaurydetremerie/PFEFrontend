@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {InsertOfferModel, Places, States} from './insertOffer.model';
+import {InsertOfferModel, Places, States, Types} from './insertOffer.model';
 
 // @ts-ignore
 @Injectable({
@@ -18,6 +18,7 @@ export class InsertOfferService {
   // @ts-ignore
   state = States;
   place = Places;
+  type = Types;
 
   readonly baseURL = 'https://localhost:7252';
 

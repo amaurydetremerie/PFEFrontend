@@ -12,6 +12,7 @@ import {CategoryModel} from '../home/shared/category.model';
 import {HttpClient} from '@angular/common/http';
 
 
+
 @Component({
   selector: 'app-insert-offer-form',
   templateUrl: './offer-form.html',
@@ -19,13 +20,13 @@ import {HttpClient} from '@angular/common/http';
 })
 export class InsertOfferFormComponent implements OnInit {
 
-  @ViewChild('fileUpload', {static: false}) fileUpload: ElementRef | undefined;
+
   files  = [];
 
 
   // @ts-ignore
   categories!: CategoryModel[];
-  categoriesChild!: CategoryModel[];
+
 
   // video
   title = 'fileupload';
@@ -66,7 +67,7 @@ export class InsertOfferFormComponent implements OnInit {
   ngOnInit(): void {
     console.log('tesfgrgbf');
     // @ts-ignore
-    // this.getAllCategories();
+    this.getAllCategories();
   }
 
 
@@ -133,6 +134,8 @@ export class InsertOfferFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getFileDetails(e: Event) {
+    // console.log (e.target.files);
+    // tslint:disable-next-line:prefer-for-of
     // @ts-ignore
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < e.target.files.length; i++) {
@@ -152,6 +155,8 @@ export class InsertOfferFormComponent implements OnInit {
   // tslint:disable-next-line:typedef
   uploadFilesImage() {
     // tslint:disable-next-line:prefer-for-of
+    // @ts-ignore
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.myForm.value.fileSource.length; i++) {
       this.frmDataImage.append('file', this.myForm.value.fileSource[i]);
     }
@@ -165,17 +170,19 @@ export class InsertOfferFormComponent implements OnInit {
       });
   }
 
-  goToChilds(id: string): void {
+ /* goToChilds(id: string): void {
     // tslint:disable-next-line:radix
     const parentId = parseInt(id);
     this.serviceCategory.getChildsCategory(parentId)
       .subscribe((categories: CategoryModel[]) => {
         this.categoriesChild = categories;
       });
-  }
+  } */
 
   // tslint:disable-next-line:typedef
   onSubmit(form: NgForm) {
+    console.log(this.service.formData);
+    console.log(form);
     console.log(this.files);
     const formData = new FormData();
     formData.append('offerJson', JSON.stringify(this.service.formData));
@@ -194,3 +201,32 @@ export class InsertOfferFormComponent implements OnInit {
     this.service.formData = new InsertOfferModel();
   }
 }
+
+/* this.fileInfos = this.serviceImage.getFiles(); */
+/* this.getvideos(); */
+/*  this.authService.instance.acquireTokenSilent({
+scopes: ['user.read'],
+account: this.authService.instance.getAllAccounts()[0]
+}).then(result => {
+console.log(result);
+this.http.get(GRAPH_ENDPOINT, {
+  headers: {
+    Authorisation: ['Bearer ' + result.idToken]
+  }
+}).subscribe(profile => {
+  console.log(profile);
+  // @ts-ignore
+  this.profile = profile;
+});
+});
+
+// const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+
+ type ProfileType = {
+  givenName?: string,
+  surname?: string,
+  userPrincipalName?: string,
+  id?: string
+};
+// profile!: ProfileType;
+*/

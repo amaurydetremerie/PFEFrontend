@@ -1,5 +1,5 @@
-export class CategoryModel {
-  id = '';
-  name = '';
-  parentId ?= '';
+export interface CategoryModel {
+  id: string;
+  name: string;
+  parentId?: string;
 }

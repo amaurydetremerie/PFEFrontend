@@ -1,16 +1,16 @@
 export class InsertOfferModel {
   id = 0;
   type: Types = Types.Give;
-  state: States = States.Published
+  state: States = States.Published;
   deleted = false;
-  Title = '';
+  title = '';
   description = '';
   place: Places = Places.Woluwe;
   price = 0;
   seller = '';
   sellerEMail = '';
   countReport = 0;
-  categoryId ?= 0;
+  categoryId ? = 0;
 }
 
 export enum States {
@@ -20,9 +20,9 @@ export enum States {
 }
 
 export enum Types {
-  Give,
-  Sale,
-  Service
+  Give = 'Give',
+  Sale = 'Sale',
+  Service = 'Service'
 }
 
 export enum Places {
