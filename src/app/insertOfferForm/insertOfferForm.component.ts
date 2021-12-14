@@ -11,7 +11,6 @@ import {CategoryService} from '../home/shared/category.service';
 import {CategoryModel} from '../home/shared/category.model';
 
 
-
 @Component({
   selector: 'app-insert-offer-form',
   templateUrl: './offer-form.html',
@@ -31,15 +30,16 @@ export class InsertOfferFormComponent implements OnInit {
   constructor(public service: InsertOfferService, public serviceImage: UploadFilesService, private toastr: ToastrService,
               public serviceVideo: ImageVideoService, public serviceCategory: CategoryService) {
   }
+
   // image
   // tslint:disable-next-line:typedef
   get f() {
     return this.myForm.controls;
   }
 
-   // @ts-ignore
-  frmDataImage = new FormData();
-  frmDataVideo = new FormData();
+  // @ts-ignore
+  frmDataImage: FormData = new FormData();
+  frmDataVideo: FormData = new FormData();
 
 
   // image
@@ -129,32 +129,17 @@ export class InsertOfferFormComponent implements OnInit {
     for (let i = 0; i < this.myFiles.length; i++) {
       this.frmDataVideo.append('fileUpload', this.myFiles[i]);
     }
-    // @ts-ignore
-    // @ts-ignore
-    this.serviceVideo.postImageVideo('http://localhost:50401/api/FileUpload/UploadFiles', frmDataVideo).subscribe(
-      data => {
-        // SHOW A MESSAGE RECEIVED FROM THE WEB API.
-        this.sMsg = data as string;
-        console.log(this.sMsg);
-      }
-    );
   }
 
   // tslint:disable-next-line:typedef
   uploadFilesImage() {
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.images.length; i++) {
-      this.frmDataImage.append('fileUpload', this.images[i]);
+    // @ts-ignore
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.myForm.value.fileSource.length; i++) {
+      this.frmDataImage.append('file', this.myForm.value.fileSource[i]);
     }
-    // @ts-ignore
-    // @ts-ignore
-    this.serviceVideo.postImageVideo('http://localhost:50401/api/FileUpload/UploadFiles', frmData).subscribe(
-      data => {
-        // SHOW A MESSAGE RECEIVED FROM THE WEB API.
-        this.sMsg = data as string;
-        console.log(this.sMsg);
-      }
-    );
+
   }
 
   getAllCategories(): void {
@@ -175,6 +160,8 @@ export class InsertOfferFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit(form: NgForm) {
+    this.uploadFilesImage();
+    console.log(this.frmDataImage);
     this.service.postFormOffer(this.frmDataImage, this.frmDataVideo); /*.subscribe(
       res => {
         this.serviceVideo.postImageVideo();
@@ -189,6 +176,7 @@ export class InsertOfferFormComponent implements OnInit {
     );
     */
   }
+
   // tslint:disable-next-line:typedef
   resetForm(form: NgForm) {
     form.form.reset();

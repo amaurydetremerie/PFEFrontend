@@ -14,7 +14,7 @@ export class InsertOfferService {
   }
 
 
-formData: InsertOfferModel = new InsertOfferModel();
+  formData: InsertOfferModel = new InsertOfferModel();
   // @ts-ignore
   state = States;
   place = Places;
@@ -23,16 +23,22 @@ formData: InsertOfferModel = new InsertOfferModel();
 
   // tslint:disable-next-line:typedef
   postFormOffer(formImage: FormData, formVideo: FormData) {
-    this.formData.Title = 'salut';
-    this.formData.seller = 'cfvr115ded';
-    this.formData.sellerEMail = 'bf45vd';
-    console.log(this.formData);
-    const form = new FormData();
+    let form: FormData;
     // @ts-ignore
-    form.append('title', this.formData.Title);
-    console.log(form);
+    form = this.formData;
+
+    formImage.forEach((value, key) => {
+      console.log('key %s: value %s', key, value);
+    });
     // @ts-ignore
-    this.http.post(this.baseURL + '/offers', form/*, formImage, formVideo*/).subscribe(result => console.log(result));
+    // tslint:disable-next-line:max-line-length
+    // @ts-ignore
+    formImage.append('offer', form);
+    this.http.post(this.baseURL + '/offers', formImage, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }, }).subscribe(
+      result => console.log(result));
     // @ts-ignore
     // return this.http.post(this.baseURL, this.formData, formImage, formVideo);
 

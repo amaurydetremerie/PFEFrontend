@@ -1,9 +1,9 @@
 export class InsertOfferModel {
   id = 0;
   type: Types = Types.Give;
-  state: States = States.Published;
-  Title = '';
+  state: States = States.Published
   deleted = false;
+  Title = '';
   description = '';
   place: Places = Places.Woluwe;
   price = 0;
