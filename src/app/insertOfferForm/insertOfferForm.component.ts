@@ -9,6 +9,7 @@ import {ImageVideoModel} from '../home/shared/imageVideo.model';
 import {ImageVideoService} from '../home/shared/imageVideo.service';
 import {CategoryService} from '../home/shared/category.service';
 import {CategoryModel} from '../home/shared/category.model';
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -28,7 +29,7 @@ export class InsertOfferFormComponent implements OnInit {
   remark = '';
 
   constructor(public service: InsertOfferService, public serviceImage: UploadFilesService, private toastr: ToastrService,
-              public serviceVideo: ImageVideoService, public serviceCategory: CategoryService) {
+              public serviceVideo: ImageVideoService, public serviceCategory: CategoryService, private http: HttpClient) {
   }
 
   // image
@@ -36,6 +37,8 @@ export class InsertOfferFormComponent implements OnInit {
   get f() {
     return this.myForm.controls;
   }
+
+  readonly baseURL = 'https://localhost:7252';
 
   // @ts-ignore
   frmDataImage: FormData = new FormData();
@@ -113,8 +116,6 @@ export class InsertOfferFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getFileDetails(e: Event) {
-    // console.log (e.target.files);
-    // tslint:disable-next-line:prefer-for-of
     // @ts-ignore
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < e.target.files.length; i++) {
@@ -133,8 +134,6 @@ export class InsertOfferFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   uploadFilesImage() {
-    // tslint:disable-next-line:prefer-for-of
-    // @ts-ignore
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.myForm.value.fileSource.length; i++) {
       this.frmDataImage.append('file', this.myForm.value.fileSource[i]);
@@ -160,21 +159,11 @@ export class InsertOfferFormComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit(form: NgForm) {
-    this.uploadFilesImage();
-    console.log(this.frmDataImage);
-    this.service.postFormOffer(this.frmDataImage, this.frmDataVideo); /*.subscribe(
-      res => {
-        this.serviceVideo.postImageVideo();
-        this.serviceImage.postImage();
-        this.resetForm(form);
-        this.toastr.success('Envoi confirmé');
-      },
-      err => {
-
-        console.log(err.error);
-      }
-    );
-    */
+    const formData = new FormData();
+    formData.append('offerJson', JSON.stringify(this.service.formData));
+    formData.append('files', JSON.stringify(this.images));
+    this.http.post(this.baseURL + '/offers', formData).subscribe(
+      result => console.log(result));
   }
 
   // tslint:disable-next-line:typedef
@@ -183,32 +172,3 @@ export class InsertOfferFormComponent implements OnInit {
     this.service.formData = new InsertOfferModel();
   }
 }
-
-/* this.fileInfos = this.serviceImage.getFiles(); */
-/* this.getvideos(); */
-/*  this.authService.instance.acquireTokenSilent({
-scopes: ['user.read'],
-account: this.authService.instance.getAllAccounts()[0]
-}).then(result => {
-console.log(result);
-this.http.get(GRAPH_ENDPOINT, {
-  headers: {
-    Authorisation: ['Bearer ' + result.idToken]
-  }
-}).subscribe(profile => {
-  console.log(profile);
-  // @ts-ignore
-  this.profile = profile;
-});
-});
-
-// const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
-
- type ProfileType = {
-  givenName?: string,
-  surname?: string,
-  userPrincipalName?: string,
-  id?: string
-};
-// profile!: ProfileType;
-*/
