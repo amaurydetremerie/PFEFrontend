@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { RoleGuard } from 'src/services/role-guard.service';
+import { CategoryAdminComponent } from './category-admin/category-admin.component';
 
 
 /**
@@ -21,6 +23,14 @@ const routes: Routes = [
       MsalGuard
     ]
   },
+  {
+    path: 'admin/categories',
+    component:CategoryAdminComponent,
+    canActivate: [
+      MsalGuard,
+      RoleGuard
+    ]}
+  ,
   {
     // Needed for hash routing
     path: 'state',
@@ -43,10 +53,11 @@ const routes: Routes = [
     ]
   },
   {
-    path:'addCategory',
+    path:'admin/addCategory',
     component: AddCategoryComponent,
     canActivate: [
-      MsalGuard
+      MsalGuard,
+      RoleGuard
     ]
   }
 ];

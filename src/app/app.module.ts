@@ -27,6 +27,8 @@ import { WeatherforecastViewComponent } from './weatherforecast-view/weatherfore
 import * as auth from './auth-config.json';
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import {RoleGuard } from '../services/role-guard.service';
+import { CategoryAdminComponent } from './category-admin/category-admin.component'
 
 const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
 
@@ -78,7 +80,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HomeComponent,
     WeatherforecastViewComponent,
     CategoryComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    CategoryAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -120,6 +123,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalBroadcastService,
     WeatherforecastService,
     CategoryService,
+    RoleGuard
   ],
   bootstrap: [AppComponent]
 })
