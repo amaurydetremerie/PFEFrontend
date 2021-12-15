@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-3 my-5" *ngFor="let offers of offers">
+        <mdb-card>
+          <mdb-card-img
+            src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg"
+            alt="Card image cap"
+          >
+          </mdb-card-img>
+          <mdb-card-body>
+            <mdb-card-title>
+              <h2>{{ offers.title }}</h2>
+            </mdb-card-title>
+            <hr />
+            <mdb-card-text>
+              {{ offers.description }}
+            </mdb-card-text>
+  
+            <mdb-card-text>
+              {{ offers.place }}
+            </mdb-card-text>
+  
+            <mdb-card-text>
+              {{ offers.sellerEMail }}
+            </mdb-card-text>
+            <a mat-stroked-button [routerLink]="['/singleOffer', offers.id]"
+              >Voir en détails
+            </a>
+            <div *ngIf="isAdmin">
+              <button mat-stroked-button (click)="deleteOffer(offers.id)" color="warn">
+                <mat-icon>
+                  delete
+                </mat-icon>
+              </button>
+            </div>
+            <div *ngIf="isAdmin">
+              <button mat-stroked-button (click)="resetSignalements(offers.id)" color="primary">
+                <mat-icon>
+                  verified
+                </mat-icon>
+              </button>
+            </div>
+          </mdb-card-body>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </mdb-card>
+      </div>
+    </div>
+  </div>
+  

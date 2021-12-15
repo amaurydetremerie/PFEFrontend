@@ -4,12 +4,12 @@ import { MsalGuard } from '@azure/msal-angular';
 
 import { HomeComponent } from './home/home.component';
 import { OffersComponent } from './offers/offers.component';
-import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { SingleOfferComponent } from './single-offer/single-offer.component';
 import { RoleGuard } from 'src/services/role-guard.service';
 import { CategoryAdminComponent } from './category-admin/category-admin.component';
+import { AnnonceSignaleComponent } from './annonce-signale/annonce-signale.component';
 
 /**
  * MSAL Angular can protect routes in your application
@@ -18,13 +18,13 @@ import { CategoryAdminComponent } from './category-admin/category-admin.componen
  */
 const routes: Routes = [
   {
-    path: 'weatherforecast-view',
-    component: WeatherforecastViewComponent,
-    canActivate: [MsalGuard],
-  },
-  {
     path: 'admin/categories',
     component: CategoryAdminComponent,
+    canActivate: [MsalGuard, RoleGuard],
+  },
+  {
+    path: 'admin/signalements',
+    component: AnnonceSignaleComponent,
     canActivate: [MsalGuard, RoleGuard],
   },
   {

@@ -4,14 +4,6 @@
 
   <div class="toolbar-spacer"></div>
 
-  <button
-    mat-raised-button
-    *ngIf="loggedIn"
-    [routerLink]="['weatherforecast-view']"
-  >
-    List
-  </button>
-
   <button mat-raised-button *ngIf="loggedIn" [routerLink]="['categories']">
     Categories
   </button>
@@ -21,8 +13,13 @@
   </button>
 
   <button mat-raised-button *ngIf="isAdmin" [routerLink]="['admin/categories']">
-    Administrator categories
+    Categories Admin
   </button>
+
+  <button mat-raised-button *ngIf="isAdmin" [routerLink]="['admin/signalements']">
+    Signalements
+  </button>
+
 
   <button
     class="btn-login"
