@@ -39,8 +39,7 @@ import { CategoryService } from '../services/category.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MemberComponent } from './member/member.component';
-import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
-import { OffersComponent } from '../app/offers/offers.component';
+import { OffersComponent } from './offers/offers.component';
 
 import * as auth from './auth-config.json';
 import {InsertOfferComponent} from './insertOffer/insertOffer.component';
@@ -48,9 +47,9 @@ import {InsertOfferFormComponent} from './insertOfferForm/insertOfferForm.compon
 import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {ToastrModule} from 'ngx-toastr';
-import { OffersService } from '../app/shared/offers.service';
+import { OffersService } from './shared/offers.service';
 import { CategoryComponent } from './category/category.component';
-import { SingleOfferComponent } from '../app/single-offer/single-offer.component';
+import { SingleOfferComponent } from './single-offer/single-offer.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { RoleGuard } from '../services/role-guard.service';
 import { CategoryAdminComponent } from './category-admin/category-admin.component';
@@ -62,7 +61,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
 
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
- * For more info, visit: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/configuration.md
+ * For more info, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/configuration.md
  */
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -82,7 +82,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 /**
  * MSAL Angular will automatically retrieve tokens for resources
  * added to protectedResourceMap. For more info, visit:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/initialization.md#get-tokens-for-web-api-calls
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob
+ * /dev/lib/msal-angular/docs/v2-docs/initialization.md#get-tokens-for-web-api-calls
  */
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
@@ -110,7 +111,6 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MemberComponent,
     InsertOfferComponent,
     InsertOfferFormComponent,
-    WeatherforecastViewComponent,
     OffersComponent,
     CategoryComponent,
     AddCategoryComponent,
@@ -137,7 +137,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatOptionModule,
     MatSelectModule,
     ToastrModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
   ],
   providers: [
