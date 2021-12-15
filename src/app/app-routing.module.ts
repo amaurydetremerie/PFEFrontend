@@ -8,6 +8,8 @@ import { WeatherforecastViewComponent } from './weatherforecast-view/weatherfore
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { SingleOfferComponent } from './single-offer/single-offer.component';
+import { RoleGuard } from 'src/services/role-guard.service';
+import { CategoryAdminComponent } from './category-admin/category-admin.component';
 
 /**
  * MSAL Angular can protect routes in your application
@@ -19,6 +21,11 @@ const routes: Routes = [
     path: 'weatherforecast-view',
     component: WeatherforecastViewComponent,
     canActivate: [MsalGuard],
+  },
+  {
+    path: 'admin/categories',
+    component: CategoryAdminComponent,
+    canActivate: [MsalGuard, RoleGuard],
   },
   {
     // Needed for hash routing
@@ -55,6 +62,11 @@ const routes: Routes = [
     path: 'singleOffer/:id',
     component: SingleOfferComponent,
     canActivate: [MsalGuard],
+  },
+  {
+    path: 'admin/addCategory',
+    component: AddCategoryComponent,
+    canActivate: [MsalGuard, RoleGuard],
   },
 ];
 

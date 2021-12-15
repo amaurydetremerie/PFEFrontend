@@ -37,12 +37,13 @@ export class AddCategoryComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.idCategoryToModify!=""){
+    if(this.idCategoryToModify!="" && this.idCategoryToModify!=undefined){
       this.categoryToAdd.id=this.idCategoryToModify;
-      this.service.updateCategory(this.categoryToAdd).subscribe(result => this._router.navigateByUrl('/categories'));
+      this.service.updateCategory(this.categoryToAdd).subscribe(result => this._router.navigateByUrl('/admin/categories'));
+      console.log(this.idCategoryToModify)
     }else{
       this.service.addCategory(this.categoryToAdd)
-      .subscribe(result => this._router.navigateByUrl('/categories'));
+      .subscribe(result => this._router.navigateByUrl('/admin/categories'));
     }
   }
 }

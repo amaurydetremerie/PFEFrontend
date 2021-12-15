@@ -4,11 +4,11 @@ import {Category} from '../../models/category';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  selector: 'app-category-admin',
+  templateUrl: './category-admin.component.html',
+  styleUrls: ['./category-admin.component.css']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryAdminComponent implements OnInit {
 
   categories: Category[] = [];
 
@@ -35,11 +35,25 @@ export class CategoryComponent implements OnInit {
       });
   }
 
+  deleteCategory(id:string): void {
+    let idToDelete = parseInt(id);
+    this.service.deleteCategory(idToDelete)
+      .subscribe(result=>window.location.reload());
+      
+  }
   goToChilds(id:string): void {
     let parentId = parseInt(id);
     this.service.getChildsCategory(parentId)
       .subscribe((categories: Category[]) => {
         this.categories = categories;
       });
+  }
+
+  editCategory(category:Category): void {
+    this._router.navigateByUrl('/admin/addCategory' + '?id=' + category.id);
+  }
+
+  addCategory(): void {
+    this._router.navigateByUrl('/admin/addCategory');
   }
 }

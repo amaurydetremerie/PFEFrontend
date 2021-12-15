@@ -14,6 +14,7 @@ import {
 } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { RoleGuard } from '../services/role-guard.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'VinciMarket';
   isIframe = false;
   loggedIn = false;
+  isAdmin= false;
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
@@ -36,6 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isIframe = window !== window.parent && !window.opener;
 
     this.checkAccount();
+    if(this.loggedIn){
+      this.checkAdmin();
+    }
 
     /**
      * You can subscribe to MSAL events as shown below. For more info,
@@ -59,6 +64,21 @@ export class AppComponent implements OnInit, OnDestroy {
     this.loggedIn = this.authService.instance.getAllAccounts().length > 0;
   }
 
+  checkAdmin() {
+    if(localStorage.getItem("isAdmin")==null){
+      this.authService.instance.acquireTokenSilent({
+        scopes: ['user.read'],
+        account: this.authService.instance.getAllAccounts()[0]
+      }).then(response => {
+        localStorage.setItem("isAdmin",String(
+          // @ts-ignore
+          response.idTokenClaims.roles.filter((x: string) => x === ('administrator')).length>0));
+          this.checkAdmin();
+      });
+    }
+    this.isAdmin=localStorage.getItem("isAdmin")==="true";
+  }
+
   login() {
     if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
       if (this.msalGuardConfig.authRequest) {
@@ -80,6 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logout() {
+    localStorage.removeItem("isAdmin");
     this.authService.logout();
   }
 

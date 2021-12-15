@@ -1,11 +1,6 @@
 <mat-card class='card-section'>
   <div class="button-row">
         <button mat-stroked-button (click)="getAllCategories()">Categories </button>
-        <button mat-stroked-button (click)="addCategory()" color="accent">
-          <mat-icon>
-            add
-          </mat-icon>
-         </button> 
   </div>
 
     <div *ngFor="let category of categories">
@@ -15,16 +10,6 @@
           <button mat-stroked-button (click)="goToChilds(category.id)">
             <mat-icon>
               navigate_next
-            </mat-icon>
-          </button>
-          <button mat-stroked-button (click)="editCategory(category)" color="primary">
-            <mat-icon>
-              edit
-            </mat-icon>
-          </button>
-          <button mat-stroked-button (click)="deleteCategory(category.id)" color="warn">
-            <mat-icon>
-              delete
             </mat-icon>
           </button>
         </div>

@@ -46,6 +46,8 @@ import { OffersService } from '../app/shared/offers.service';
 import { CategoryComponent } from './category/category.component';
 import { SingleOfferComponent } from '../app/single-offer/single-offer.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { RoleGuard } from '../services/role-guard.service';
+import { CategoryAdminComponent } from './category-admin/category-admin.component';
 
 const isIE =
   window.navigator.userAgent.indexOf('MSIE ') > -1 ||
@@ -105,6 +107,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     CategoryComponent,
     AddCategoryComponent,
     SingleOfferComponent,
+    CategoryAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -148,6 +151,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     WeatherforecastService,
     OffersService,
     CategoryService,
+    RoleGuard,
   ],
   bootstrap: [AppComponent],
 })
