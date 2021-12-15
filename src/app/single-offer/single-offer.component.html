@@ -1,0 +1,93 @@
+<div class="wrapper container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" id="main-card">
+      <div class="card">
+        <div
+          class="bg-image hover-overlay ripple"
+          data-mdb-ripple-color="light"
+        >
+          <img
+            src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg"
+            class="img-fluid"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.15)"
+            ></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title font-weight-bold">
+            <a>{{ offers.title }}</a>
+          </h1>
+          <ul class="list-unstyled list-inline mb-0">
+            <li class="list-inline-item">
+              <p class="text">
+                <i class="fa fa-map-marker" style="font-size: 25px"></i>
+                {{ offers.place }}
+              </p>
+            </li>
+          </ul>
+          <p class="mb-2">€ • {{ offers.price }}</p>
+          <p class="card-text">
+            {{ offers.type }}
+          </p>
+          <hr class="my-4" />
+          <p class="lead"><strong>Description</strong></p>
+          <p class="card-text">
+            {{ offers.description }}
+          </p>
+
+          <hr />
+          <button
+            type="button"
+            class="btn"
+            style="background: #058aae; color: #fff"
+            (click)="onBack()"
+          >
+            Retourner aux annonces
+          </button>
+        </div>
+        <div class="card-footer">
+          <div>
+            Numéro de l'annonce:
+            {{ offers.id }}
+            <button
+              type="button"
+              class="btn btn-default"
+              aria-label="Left Align"
+              id="report-button"
+            >
+              <span
+                class="fa fa-exclamation-triangle fa-lg"
+                aria-hidden="true"
+                style="color: red"
+              ></span>
+              Signaler a VinciMarket
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col" id="second-card">
+      <div class="card" style="width: 25rem">
+        <div class="card-body">
+          <i class="fa fa-user" style="font-size: 25px"></i>
+          <p class="text">
+            {{ offers.sellerEMail }}
+          </p>
+          <hr />
+
+          <p class="card-text">
+            Si vous êtes interessé par l'annonce veuillez contacter le vendeur
+            en lui envoyant un message
+          </p>
+          <button type="button" class="btn btn-warning btn-rounded">
+            <i class="fa fa-comments-o" aria-hidden="true"></i> Message
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

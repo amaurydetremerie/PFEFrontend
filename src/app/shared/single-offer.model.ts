@@ -4,7 +4,7 @@ import { Types } from './types.model';
 import { States } from './states.model';
 import { Places } from './places.model';
 
-export interface Offers {
+export interface SingleOffers {
   id: string;
   type: Types;
   state: States;
@@ -12,7 +12,6 @@ export interface Offers {
   title: string;
   description?: string;
   place: Places;
-  price: number;
   seller: string;
   sellerEMail: string;
   countReport: string;

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -10,8 +10,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
@@ -44,6 +44,7 @@ import { WeatherforecastViewComponent } from './weatherforecast-view/weatherfore
 import * as auth from './auth-config.json';
 import { OffersService } from '../app/shared/offers.service';
 import { CategoryComponent } from './category/category.component';
+import { SingleOfferComponent } from '../app/single-offer/single-offer.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 
 const isIE =
@@ -103,6 +104,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     OffersComponent,
     CategoryComponent,
     AddCategoryComponent,
+    SingleOfferComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,6 +122,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatFormFieldModule,
     MatCheckboxModule,
     MatIconModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [
     {

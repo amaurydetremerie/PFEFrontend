@@ -1,0 +1,19 @@
+#main-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+
+  display: block;
+}
+
+#report-button {
+  float: right;
+}
+
+#second-card {
+  position: absolute;
+  top: 10%;
+  text-align: center;
+}

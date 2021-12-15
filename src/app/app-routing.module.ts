@@ -7,6 +7,7 @@ import { OffersComponent } from './offers/offers.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { SingleOfferComponent } from './single-offer/single-offer.component';
 
 /**
  * MSAL Angular can protect routes in your application
@@ -48,6 +49,11 @@ const routes: Routes = [
   {
     path: 'addCategory',
     component: AddCategoryComponent,
+    canActivate: [MsalGuard],
+  },
+  {
+    path: 'singleOffer/:id',
+    component: SingleOfferComponent,
     canActivate: [MsalGuard],
   },
 ];
