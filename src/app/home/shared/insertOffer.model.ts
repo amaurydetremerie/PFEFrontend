@@ -3,14 +3,11 @@ export class InsertOfferModel {
   type: Types = Types.Give;
   state: States = States.Published;
   deleted = false;
-  title = '';
-  description = '';
+  title: string | undefined;
+  description: string | undefined;
   place: Places = Places.Woluwe;
   price = 0;
-  seller = '';
-  sellerEMail = '';
-  countReport = 0;
-  categoryId ? = 0;
+  categoryId: number | undefined;
 }
 
 export enum States {

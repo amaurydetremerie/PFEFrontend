@@ -46,10 +46,6 @@ const routes: Routes = [
     path: 'insertOffer',
     component: InsertOfferComponent
   },
-  {
-    path: 'insertOfferForm',
-    component: InsertOfferFormComponent
-  }
 ];
 
 const isIframe = window !== window.parent && !window.opener;

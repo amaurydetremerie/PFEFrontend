@@ -5,7 +5,7 @@
     <div class="row mb-4">
       <div class="col">
         <div class="form-outline">
-          <label class="form-label">Titre</label>
+          <label class="form-label">Titre</label><span style="color: red"> *</span>
           <input type="text" class="form-control form-control-lg" placeholder="" name="title" required
                  #title="ngModel" [(ngModel)]="service.formData.title">
         </div>
@@ -21,21 +21,27 @@
     </div>
   </div>
 
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" placeholder="" name="type" id="sale"
-           #type="ngModel" [(ngModel)]="service.formData.type" [value]="service.type.Sale">
-    <label class="form-check-label" for="sale">A vendre</label>
+  <div>
+    Type d'annonce <span style="color: red"> * </span> :
+    <br>
+    <div class="form-check form-check-inline">
+      <input required class="form-check-input" type="radio" placeholder="" name="type" id="sale"
+             #type="ngModel" [(ngModel)]="service.formData.type" [value]="service.type.Sale">
+      <label class="form-check-label" for="sale">A vendre</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" placeholder="" name="type" id="give"
+             #type="ngModel" [(ngModel)]="service.formData.type" [value]="service.type.Give">
+      <label class="form-check-label" for="give">A donner</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" placeholder="" name="type" id="service"
+             #type="ngModel" [(ngModel)]="service.formData.type" [value]="service.type.Service">
+      <label class="form-check-label" for="service">Service</label>
+    </div>
   </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" placeholder="" name="type" id="give"
-           #type="ngModel" [(ngModel)]="service.formData.type" [value]="service.type.Give">
-    <label class="form-check-label" for="give">A donner</label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" placeholder="" name="type" id="service"
-           #type="ngModel" [(ngModel)]="service.formData.type" [value]="service.type.Service">
-    <label class="form-check-label" for="service">Service</label>
-  </div>
+
+  <br>
 
   <div class="form-group">
     <label>Prix</label>
@@ -52,22 +58,24 @@
       </select>
     </div> -->
 
-
-
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" placeholder="" name="place" id="woluwe"
-           #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Woluwe">
-    <label class="form-check-label" for="sale">Woluwe</label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" placeholder="" name="place" id="ixelles"
-           #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Ixelles">
-    <label class="form-check-label" for="give">Ixelles</label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" placeholder="" name="place" id="louvain"
-           #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Louvain">
-    <label class="form-check-label" for="service">Louvain-La-Neuve</label>
+  <div>
+    Campus de l'offre <span style="color: red"> * </span> :
+    <br>
+    <div class="form-check form-check-inline">
+      <input required class="form-check-input" type="radio" placeholder="" name="place" id="woluwe"
+             #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Woluwe">
+      <label class="form-check-label" for="sale">Woluwe</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" placeholder="" name="place" id="ixelles"
+             #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Ixelles">
+      <label class="form-check-label" for="give">Ixelles</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" placeholder="" name="place" id="louvain"
+             #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Louvain">
+      <label class="form-check-label" for="service">Louvain-La-Neuve</label>
+    </div>
   </div>
 
   <!-- <div class="form-group">
@@ -101,54 +109,55 @@
     </div>
   </div>
 
-  <img *ngFor='let url of images' [src]="url" height="150" width="200px" style="margin: 3px;"> <br/>
+
+  <div class="row align-items-center" *ngFor='let img of images'>
+    <div  class="col-6">
+    <img [src]="img.url" height="150" width="200px" style="margin: 3px;">
+    </div>
+    <div  class="col-6">
+    <button type="button" height="150" width="10px" style="margin: 3px;"
+            class="btn btn-danger" id="dltbutton" title="Delete" (click)="onDelete(img)">delete
+    </button>
+  </div>
+  </div>
+  <br/>
 
   <!-- -->
-
-
   <!-- Video -->
 
-  Video
 
-  <div class="form-group">
+  Video
+  <div [formGroup]="myForm">
     <ng-container>
-      <input type="file" id="fileVideo" multiple (change)="getFileDetails($event)">
-      <!--  <button class="btn btn-primary" (click)="uploadFiles()">Upload</button> -->
+      <input type="file" class="form-control" id="fileVideo" multiple (change)="getFileDetails($event)">
     </ng-container>
   </div>
-  <div class="col-sm-10" *ngFor="let Video of myVideos | async; let i=index">
-    <video width="270" height="220" controls disabled="true" (click)="toggleVideo()" #videoPlayer>
-      <source [src]="Video.path" type="video/mp4">
+
+  <div class="row align-items-center" *ngFor="let Video of myFiles">
+  <div  class="col-6">
+    <video [src]="Video.path" width="200px" height="150" controls disabled="true"
+           (click)="toggleVideo($event)" #videoPlayer>
     </video>
+  </div>
+  <div class="col-6">
+    <button type="button"
+            class="btn btn-danger " id="video" title="Delete" (click)="onDeleteVideo(Video)">
+      delete
+    </button>
+  </div>
   </div>
 
   <!--  -->
 
-  <!-- <select >
-   <option>{{profile?.surname}}</option>
-   <option>{{profile?.givenName}}</option>
- </select> -->
-
-
-  <!-- <select *ngFor="let category of categories">
-     <option *ngIf="goToChilds(category.id)">
-       <select *ngFor="let childCategory of categoriesChild">
-         {{childCategory?.id}}
-       </select>
-     </option>
-    <option>{{category?.id}}</option>
-    <option>{{category?.name}}</option>
-  </select>-->
-
-
-  <label for="category">Categorie parente</label>
-  <select name="parentCategories" [(ngModel)]="this.service.formData.categoryId" class="form-control" id="category" >
+  <label for="category">Categorie</label><span style="color: red"> *</span>
+  <select required name="parentCategories" [(ngModel)]="this.service.formData.categoryId" class="form-select"
+          id="category">
     <option optionnal *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
   </select>
 
-
-  <div class="form-group">
-    <button class="button.btn.btn-info.btn-lg.btn-block" type="submit">Confirmer</button>
+  <br>
+  <div class="form-group text-center">
+    <button class="btn btn-success " type="submit" [disabled]="!form.form.valid">Confirmer</button>
   </div>
 </form>
 
@@ -205,3 +214,20 @@
   </label>
 </div>
 -->
+
+
+<!-- <select >
+ <option>{{profile?.surname}}</option>
+ <option>{{profile?.givenName}}</option>
+</select> -->
+
+
+<!-- <select *ngFor="let category of categories">
+   <option *ngIf="goToChilds(category.id)">
+     <select *ngFor="let childCategory of categoriesChild">
+       {{childCategory?.id}}
+     </select>
+   </option>
+  <option>{{category?.id}}</option>
+  <option>{{category?.name}}</option>
+</select>-->
