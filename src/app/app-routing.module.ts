@@ -3,12 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { HomeComponent } from './home/home.component';
+import { OffersComponent } from './offers/offers.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
+import { SingleOfferComponent } from './single-offer/single-offer.component';
 import { RoleGuard } from 'src/services/role-guard.service';
 import { CategoryAdminComponent } from './category-admin/category-admin.component';
-
 
 /**
  * MSAL Angular can protect routes in your application
@@ -19,57 +20,66 @@ const routes: Routes = [
   {
     path: 'weatherforecast-view',
     component: WeatherforecastViewComponent,
-    canActivate: [
-      MsalGuard
-    ]
+    canActivate: [MsalGuard],
   },
   {
     path: 'admin/categories',
-    component:CategoryAdminComponent,
-    canActivate: [
-      MsalGuard,
-      RoleGuard
-    ]}
-  ,
+    component: CategoryAdminComponent,
+    canActivate: [MsalGuard, RoleGuard],
+  },
   {
     // Needed for hash routing
     path: 'state',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     // Needed for hash routing
     path: 'code',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
-    path:'categories',
+    // Needed for hash routing
+    path: 'offers',
+    component: OffersComponent,
+    canActivate: [MsalGuard],
+  },
+
+  {
+    path: 'categories',
     component: CategoryComponent,
-    canActivate: [
-      MsalGuard
-    ]
+    canActivate: [MsalGuard],
   },
   {
-    path:'admin/addCategory',
+    path: 'addCategory',
     component: AddCategoryComponent,
-    canActivate: [
-      MsalGuard,
-      RoleGuard
-    ]
-  }
+    canActivate: [MsalGuard],
+  },
+  {
+    path: 'singleOffer/:id',
+    component: SingleOfferComponent,
+    canActivate: [MsalGuard],
+  },
+  {
+    path: 'admin/addCategory',
+    component: AddCategoryComponent,
+    canActivate: [MsalGuard, RoleGuard],
+  },
 ];
 
 const isIframe = window !== window.parent && !window.opener;
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    useHash: true,
-    // Don't perform initial navigation in iframes
-    initialNavigation: !isIframe ? 'enabled' : 'disabled'
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: true,
+      // Don't perform initial navigation in iframes
+      initialNavigation: !isIframe ? 'enabled' : 'disabled',
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

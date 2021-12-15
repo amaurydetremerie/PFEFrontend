@@ -2,36 +2,56 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { IPublicClientApplication, PublicClientApplication, InteractionType, BrowserCacheLocation } from '@azure/msal-browser';
-import { MsalGuard, MsalInterceptor, MsalBroadcastService, MsalInterceptorConfiguration, MsalModule, MsalService, MSAL_GUARD_CONFIG, MSAL_INSTANCE, MSAL_INTERCEPTOR_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
+import {
+  IPublicClientApplication,
+  PublicClientApplication,
+  InteractionType,
+  BrowserCacheLocation,
+} from '@azure/msal-browser';
+import {
+  MsalGuard,
+  MsalInterceptor,
+  MsalBroadcastService,
+  MsalInterceptorConfiguration,
+  MsalModule,
+  MsalService,
+  MSAL_GUARD_CONFIG,
+  MSAL_INSTANCE,
+  MSAL_INTERCEPTOR_CONFIG,
+  MsalGuardConfiguration,
+} from '@azure/msal-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { WeatherforecastService } from '../services/weatherforecast.service';
-import { CategoryService } from '../services/category.service'
+import { CategoryService } from '../services/category.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { OffersComponent } from '../app/offers/offers.component';
 import { WeatherforecastViewComponent } from './weatherforecast-view/weatherforecast-view.component';
 
 import * as auth from './auth-config.json';
+import { OffersService } from '../app/shared/offers.service';
 import { CategoryComponent } from './category/category.component';
+import { SingleOfferComponent } from '../app/single-offer/single-offer.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
-import {RoleGuard } from '../services/role-guard.service';
-import { CategoryAdminComponent } from './category-admin/category-admin.component'
+import { RoleGuard } from '../services/role-guard.service';
+import { CategoryAdminComponent } from './category-admin/category-admin.component';
 
-const isIE = window.navigator.userAgent.indexOf("MSIE ") > -1 || window.navigator.userAgent.indexOf("Trident/") > -1;
-
+const isIE =
+  window.navigator.userAgent.indexOf('MSIE ') > -1 ||
+  window.navigator.userAgent.indexOf('Trident/') > -1;
 
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
@@ -41,8 +61,9 @@ export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
       clientId: auth.credentials.clientId,
-      authority: 'https://login.microsoftonline.com/' + auth.credentials.tenantId,
-      redirectUri: auth.configuration.redirectUri
+      authority:
+        'https://login.microsoftonline.com/' + auth.credentials.tenantId,
+      redirectUri: auth.configuration.redirectUri,
     },
     cache: {
       cacheLocation: BrowserCacheLocation.LocalStorage,
@@ -58,11 +79,14 @@ export function MSALInstanceFactory(): IPublicClientApplication {
  */
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  protectedResourceMap.set(auth.resources.todoListApi.resourceUri, auth.resources.todoListApi.resourceScopes);
+  protectedResourceMap.set(
+    auth.resources.todoListApi.resourceUri,
+    auth.resources.todoListApi.resourceScopes
+  );
 
   return {
     interactionType: InteractionType.Redirect,
-    protectedResourceMap
+    protectedResourceMap,
   };
 }
 
@@ -79,9 +103,11 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     AppComponent,
     HomeComponent,
     WeatherforecastViewComponent,
+    OffersComponent,
     CategoryComponent,
     AddCategoryComponent,
-    CategoryAdminComponent
+    SingleOfferComponent,
+    CategoryAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,32 +125,34 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatFormFieldModule,
     MatCheckboxModule,
     MatIconModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory
+      useFactory: MSALInstanceFactory,
     },
     {
       provide: MSAL_GUARD_CONFIG,
-      useFactory: MSALGuardConfigFactory
+      useFactory: MSALGuardConfigFactory,
     },
     {
       provide: MSAL_INTERCEPTOR_CONFIG,
-      useFactory: MSALInterceptorConfigFactory
+      useFactory: MSALInterceptorConfigFactory,
     },
     MsalService,
     MsalGuard,
     MsalBroadcastService,
     WeatherforecastService,
+    OffersService,
     CategoryService,
-    RoleGuard
+    RoleGuard,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
