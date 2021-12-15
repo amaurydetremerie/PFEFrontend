@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 my-5" *ngFor="let offers of offers">
+      <mdb-card>
+        <mdb-card-img
+          src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg"
+          alt="Card image cap"
+        >
+        </mdb-card-img>
+        <mdb-card-body>
+          <mdb-card-title>
+            <h2>{{ offers.title }}</h2>
+          </mdb-card-title>
+          <hr />
+          <mdb-card-text>
+            {{ offers.description }}
+          </mdb-card-text>
+
+          <mdb-card-text>
+            {{ offers.place }}
+          </mdb-card-text>
+
+          <mdb-card-text>
+            {{ offers.sellerEMail }}
+          </mdb-card-text>
+          <a mat-stroked-button [routerLink]="['/singleOffer', offers.id]"
+            >Voir en détails
+          </a>
+          <button (click)="signalerOffer(offers.id)" type="button" class="btn btn-default" aria-label="Left Align" id="report-button">
+              <span class="fa fa-exclamation-triangle fa-lg" aria-hidden="true" style="color: red"></span>
+              Signaler a VinciMarket
+            </button>
+        </mdb-card-body>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </mdb-card>
+    </div>
+  </div>
+</div>

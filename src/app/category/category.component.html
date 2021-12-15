@@ -1,0 +1,19 @@
+<mat-card class='card-section'>
+  <div class="button-row">
+        <button mat-stroked-button (click)="getAllCategories()">Categories </button>
+  </div>
+
+    <div *ngFor="let category of categories">
+      <section>
+        <div class="label">{{category.name}} </div>
+        <div class="button-row">
+          <button mat-stroked-button (click)="goToChilds(category.id)">
+            <mat-icon>
+              navigate_next
+            </mat-icon>
+          </button>
+        </div>
+      </section>
+      <mat-divider></mat-divider>
+    </div>
+
