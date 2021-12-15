@@ -4,29 +4,43 @@ import { Offers } from '../shared/offers.model';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
 import { Router } from '@angular/router';
+import { off } from 'process';
 
 @Component({
-  selector: 'app-offers',
-  templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.css'],
-  styles: [],
+  selector: 'app-annonce-signale',
+  templateUrl: './annonce-signale.component.html',
+  styleUrls: ['./annonce-signale.component.css']
 })
-export class OffersComponent implements OnInit {
+
+export class AnnonceSignaleComponent implements OnInit {
   offers: Offers[] = [];
   categories: Category[] = [];
-
+  isAdmin:boolean = false;
   displayedColumns = ['title', 'description', 'place', 'sellerEMail'];
 
   constructor(private service: OffersService, private _router: Router) {}
 
   ngOnInit(): void {
-    this.getOffers();
+    this.isAdmin=localStorage.getItem("isAdmin")==="true";
+    this.getSignaledOffers();
   }
 
-  getOffers(): void {
-    this.service.getByPrice().subscribe((offers: Offers[]) => {
+  getSignaledOffers(): void {
+    console.log("je suis ici")
+    this.service.getAllSignale().subscribe((offers: Offers[]) => {
       this.offers = offers;
     });
+    console.log(this.offers)
+  }
+
+  resetSignalements(id:string){
+    let idToGet = parseInt(id);
+    this.service.resetSignalements(idToGet).subscribe(result=>window.location.reload());
+  }
+
+  deleteOffer(id:string): void {
+    let idToGet = parseInt(id);
+    this.service.deleteOffer(idToGet).subscribe(result=>window.location.reload());
   }
 
   getCategory(id: string): void {
@@ -42,11 +56,6 @@ export class OffersComponent implements OnInit {
     this.service.getAllCategories().subscribe((categories: Category[]) => {
       this.categories = categories;
     });
-  }
-
-  signalerOffer(id:string){
-    let idToGet = parseInt(id);
-    this.service.signalerOffer(idToGet).subscribe(result=>alert("Annonce signale"));
   }
 
   goToChilds(id: string): void {

@@ -30,4 +30,20 @@ export class OffersService {
   getChildsCategory(id: number) {
     return this.http.get<Category[]>(this.url + '/categories/childs/' + id);
   }
+
+  getAllSignale(){
+      return this.http.get<Offers[]>(this.url + '/offers/report');
+  }
+  
+  resetSignalements(id:number){
+    return this.http.put<Offers>(this.url + '/offers/report/'+ id,{});
+  }
+  
+  deleteOffer(id:number){
+    return this.http.delete<Offers>(this.url + '/offers/' + id)
+  }
+
+  signalerOffer(id:number){
+    return this.http.post<Offers>(this.url + '/offers/report/'+ id, id)
+  }
 }

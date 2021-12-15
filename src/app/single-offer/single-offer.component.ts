@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SingleOfferComponent implements OnInit {
   // @ts-ignore
   offers: Offers;
+  isAdmin:boolean = false;
   id;
 
   displayedColumns = ['title', 'description', 'place', 'sellerEMail'];
@@ -22,9 +23,9 @@ export class SingleOfferComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this._Activatedroute.snapshot.params['id'];
-    console.log(id);
-    this.getOffersById(id);
+    this.id = this._Activatedroute.snapshot.params['id'];
+    this.getOffersById(this.id);
+    this.isAdmin=localStorage.getItem("isAdmin")==="true";
   }
 
   getOffersById(id: string): void {
@@ -32,6 +33,19 @@ export class SingleOfferComponent implements OnInit {
     this._offerService.getById(idToGet).subscribe((offers: Offers) => {
       this.offers = offers;
     });
+  }
+
+  
+  resetSignalements(){
+    this._offerService.resetSignalements(this.id).subscribe(result=>this._router.navigateByUrl("/admin/signalements"));
+  }
+
+  deleteOffer(): void {
+    this._offerService.deleteOffer(this.id).subscribe(result=>this._router.navigateByUrl("/admin/signalements"));
+  }
+
+  signalerOffer(){
+    this._offerService.signalerOffer(this.id).subscribe(result=>alert("Annonce signale"));
   }
 
   onBack(): void {
