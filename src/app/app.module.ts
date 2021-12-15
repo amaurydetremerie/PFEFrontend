@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
@@ -37,24 +38,31 @@ import { AppRoutingModule } from './app-routing.module';
 import { CategoryService } from '../services/category.service';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { OffersComponent } from '../app/offers/offers.component';
+import { MemberComponent } from './member/member.component';
+import { OffersComponent } from './offers/offers.component';
 
 import * as auth from './auth-config.json';
-import { OffersService } from '../app/shared/offers.service';
+import {InsertOfferComponent} from './insertOffer/insertOffer.component';
+import {InsertOfferFormComponent} from './insertOfferForm/insertOfferForm.component';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {ToastrModule} from 'ngx-toastr';
+import { OffersService } from './shared/offers.service';
 import { CategoryComponent } from './category/category.component';
-import { SingleOfferComponent } from '../app/single-offer/single-offer.component';
+import { SingleOfferComponent } from './single-offer/single-offer.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { RoleGuard } from '../services/role-guard.service';
 import { CategoryAdminComponent } from './category-admin/category-admin.component';
 import { AnnonceSignaleComponent } from './annonce-signale/annonce-signale.component';
 
-const isIE =
-  window.navigator.userAgent.indexOf('MSIE ') > -1 ||
-  window.navigator.userAgent.indexOf('Trident/') > -1;
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
+
+
 
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
- * For more info, visit: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/configuration.md
+ * For more info, visit:
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/configuration.md
  */
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -74,14 +82,13 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 /**
  * MSAL Angular will automatically retrieve tokens for resources
  * added to protectedResourceMap. For more info, visit:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/initialization.md#get-tokens-for-web-api-calls
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob
+ * /dev/lib/msal-angular/docs/v2-docs/initialization.md#get-tokens-for-web-api-calls
  */
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  protectedResourceMap.set(
-    auth.resources.todoListApi.resourceUri,
-    auth.resources.todoListApi.resourceScopes
-  );
+  protectedResourceMap.set(auth.resources.todoListApi.resourceUri, auth.resources.todoListApi.resourceScopes);
+  protectedResourceMap.set('https://graph.microsoft.com/v1.0', ['user.read', ]);
 
   return {
     interactionType: InteractionType.Redirect,
@@ -101,6 +108,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   declarations: [
     AppComponent,
     HomeComponent,
+    MemberComponent,
+    InsertOfferComponent,
+    InsertOfferFormComponent,
     OffersComponent,
     CategoryComponent,
     AddCategoryComponent,
@@ -124,6 +134,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatFormFieldModule,
     MatCheckboxModule,
     MatIconModule,
+    MatOptionModule,
+    MatSelectModule,
+    ToastrModule.forRoot(),
+    ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
   ],
   providers: [

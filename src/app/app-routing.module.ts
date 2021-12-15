@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { HomeComponent } from './home/home.component';
+import { MemberComponent } from './member/member.component';
+import {InsertOfferComponent} from './insertOffer/insertOffer.component';
 import { OffersComponent } from './offers/offers.component';
 import { CategoryComponent } from './category/category.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
@@ -14,9 +16,18 @@ import { AnnonceSignaleComponent } from './annonce-signale/annonce-signale.compo
 /**
  * MSAL Angular can protect routes in your application
  * using MsalGuard. For more info, visit:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/docs/v2-docs/initialization.md#secure-the-routes-in-your-application
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-angular/
+ * docs/v2-docs/initialization.md#secure-the-routes-in-your-application
  */
 const routes: Routes = [
+  {
+    path: 'admin/members',
+    component: MemberComponent,
+    canActivate: [
+      MsalGuard,
+      RoleGuard
+    ]
+  },
   {
     path: 'admin/categories',
     component: CategoryAdminComponent,
@@ -39,7 +50,11 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent,
+    component: HomeComponent
+  },
+  {
+    path: 'insertOffer',
+    component: InsertOfferComponent,
   },
   {
     // Needed for hash routing
