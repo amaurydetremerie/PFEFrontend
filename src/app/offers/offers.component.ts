@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OffersService } from '../../services/offers.service';
 import { Offers } from '../../models/offers.model';
-import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-offers',
@@ -17,7 +15,7 @@ export class OffersComponent implements OnInit {
 
   displayedColumns = ['title', 'description', 'place', 'sellerEMail'];
 
-  constructor(private service: OffersService, private _router: Router) {}
+  constructor(private service: OffersService) {}
 
   ngOnInit(): void {
     this.getOffers();
@@ -29,8 +27,32 @@ export class OffersComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  getOfferByCategory(id: string) {
+    // tslint:disable-next-line:radix
+    this.service.getOfferByCategory(parseInt(id)).subscribe((offers: Offers[]) => {
+      this.offers = offers;
+      console.log(this.offers);
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getByPriceFilter(minPrice: string, maxPrice: string) {
+    this.service.getByPriceFilter(parseFloat(minPrice), parseFloat(maxPrice)).subscribe((offers: Offers[]) => {
+      this.offers = offers;
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getByPlace(value: any) {
+    this.service.getByPlace(value.place).subscribe((offers: Offers[]) => {
+      this.offers = offers;
+    });
+  }
+
   getCategory(id: string): void {
-    let idToGet = parseInt(id);
+    // tslint:disable-next-line:radix
+    const idToGet = parseInt(id);
     this.service
       .getCategoryById(idToGet)
       .subscribe((categories: Category[]) => {
@@ -44,13 +66,9 @@ export class OffersComponent implements OnInit {
     });
   }
 
-  signalerOffer(id:string){
-    let idToGet = parseInt(id);
-    this.service.signalerOffer(idToGet).subscribe(result=>alert("Annonce signale"));
-  }
-
   goToChilds(id: string): void {
-    let parentId = parseInt(id);
+    // tslint:disable-next-line:radix
+    const parentId = parseInt(id);
     this.service
       .getChildsCategory(parentId)
       .subscribe((categories: Category[]) => {

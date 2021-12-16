@@ -53,23 +53,7 @@
           <div>
             Numéro de l'annonce:
             {{ offers.id }}
-            <div *ngIf="isAdmin">
-              <button mat-stroked-button (click)="deleteOffer()" color="warn">
-                <mat-icon>
-                  delete
-                </mat-icon>
-              </button>
-            </div>
-            <div *ngIf="isAdmin">
-              <button mat-stroked-button (click)="resetSignalements()" color="primary">
-                <mat-icon>
-                  verified
-                </mat-icon>
-              </button>
-            </div>
-
             <button
-            (click)="signalerOffer()"
               type="button"
               class="btn btn-default"
               aria-label="Left Align"
@@ -95,13 +79,46 @@
           </p>
           <hr />
 
+          <div *ngIf="offers.place == 'Woluwe'">
+            <agm-map
+              [zoom]="19"
+              [latitude]="50.8495056284055"
+              [longitude]="4.451087123549969"
+            >
+            </agm-map>
+          </div>
+          <div *ngIf="offers.place == 'Ixelles'">
+            <agm-map
+              [zoom]="19"
+              [latitude]="50.838746672160404"
+              [longitude]="4.372030401340494"
+            >
+            </agm-map>
+          </div>
+
+          <div *ngIf="offers.place == 'Louvain'">
+            <agm-map
+              [zoom]="19"
+              [latitude]="50.671520461817884"
+              [longitude]="4.610756211363941"
+            >
+            </agm-map>
+          </div>
+          <hr />
+
           <p class="card-text">
             Si vous êtes interessé par l'annonce veuillez contacter le vendeur
             en lui envoyant un message
           </p>
-          <button type="button" class="btn btn-warning btn-rounded">
+
+          <a
+            href="https://teams.microsoft.com/l/chat/0/0?users='{{
+              offers.sellerEMail
+            }}' "
+            class="btn btn-warning btn-rounded"
+          >
             <i class="fa fa-comments-o" aria-hidden="true"></i> Message
-          </button>
+          </a>
         </div>
       </div>
     </div>
