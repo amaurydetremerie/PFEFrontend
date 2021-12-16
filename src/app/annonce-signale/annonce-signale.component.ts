@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OffersService } from '../shared/offers.service';
-import { Offers } from '../shared/offers.model';
+import { OffersService } from '../../services/offers.service';
+import { Offers } from '../../models/offers.model';
 import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
 import { Router } from '@angular/router';

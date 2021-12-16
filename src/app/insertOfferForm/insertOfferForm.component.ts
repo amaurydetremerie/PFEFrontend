@@ -1,13 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {InsertOfferModel} from '../home/shared/insertOffer.model';
-import {InsertOfferService} from '../home/shared/insertOffer.service';
+import {InsertOfferModel} from '../../models/insertOffer.model';
+import {InsertOfferService} from '../../services/insertOffer.service';
 import {Observable} from 'rxjs';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {ImageVideoModel} from '../home/shared/imageVideo.model';
-import {CategoryService} from '../home/shared/category.service';
-import {MimeVerify} from '../home/shared/mimeVerify';
-import {CategoryModel} from '../home/shared/category.model';
+import {ImageVideoModel} from '../../models/imageVideo.model';
+import {CategoryService} from '../../services/category.service';
+import {MimeVerify} from '../../models/mimeVerify';
+import {Category} from '../../models/category';
 import {HttpClient} from '@angular/common/http';
 
 
@@ -208,7 +208,7 @@ export class InsertOfferFormComponent implements OnInit {
 
   getAllCategories(): void {
     this.serviceCategory.getAllCategories()
-      .subscribe((categories: CategoryModel[]) => {
+      .subscribe((categories: Category[]) => {
         this.categories = categories;
       });
   }

@@ -16,7 +16,7 @@ import {
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { RoleGuard } from '../services/role-guard.service';
-import {userService} from './home/shared/user.service';
+import {userService} from '../services/user.service';
 
 @Injectable({
   providedIn: 'root'
