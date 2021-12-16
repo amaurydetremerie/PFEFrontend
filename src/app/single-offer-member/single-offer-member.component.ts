@@ -73,7 +73,13 @@ export class SingleOfferMemberComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit(form: NgForm) {
-    this.offerService.updateOffer(form);
+    this.offerService.updateOffer(this.offer).subscribe(r => {
+        this.toastr.success('votre annonce a bien été mise à jour');
+      },
+      err => {
+        this.toastr.error(err);
+        console.log(err);
+      });
   }
 
   onBack(): void {

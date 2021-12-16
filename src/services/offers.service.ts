@@ -89,8 +89,8 @@ export class OffersService {
   }
 
   // tslint:disable-next-line:typedef
-  updateOffer(offer: NgForm){
+  updateOffer(offer: InsertOfferModel){
     // @ts-ignore
-    return this.http.put(this.url + '/offers' , offer);
+    return this.http.put<InsertOfferModel>(this.url + '/offers' , offer);
   }
 }
