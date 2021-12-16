@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule} from '@agm/core';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
@@ -120,6 +121,9 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   ],
   imports: [
     BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBWAxZuxBotVm1XRPLLJzKlPaNNL26J6tY'
+    }),
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,

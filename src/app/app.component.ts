@@ -31,7 +31,9 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'VinciMarket';
   isIframe = false;
   loggedIn = false;
-  isAdmin= false;
+  isAdmin = false;
+  lat = 51.678418;
+  lng = 7.809007;
   // tslint:disable-next-line:variable-name
   private readonly _destroying$ = new Subject<void>();
 
