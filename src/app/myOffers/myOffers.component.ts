@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {OffersService} from '../../services/offers.service';
 import {Offers} from '../../models/offers.model';
 import {Category} from '../../models/category';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-offers',
@@ -15,7 +16,7 @@ export class MyOffersComponent implements OnInit {
 
   displayedColumns = ['title', 'description', 'place', 'sellerEMail'];
 
-  constructor(private service: OffersService) {
+  constructor(private service: OffersService, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -84,10 +85,14 @@ export class MyOffersComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  DeleteMyOffer(id: string) {
+  DeleteMyOffer(id: any) {
     // tslint:disable-next-line:radix
-    const idToGet = parseInt(id);
-    this.service.deleteMyOffer(idToGet);
+    this.service.deleteMyOffer(id).subscribe(r => {
+      this.toastr.success('votre annonce a bien été supprimé');
+      },
+      err => {
+        this.toastr.error(err);
+      });
     console.log('test');
   }
 }

@@ -118,9 +118,7 @@
             <a mat-stroked-button [routerLink]="['/myOffer', offers.id]"
             >Modifier l'offre
             </a>
-            <a mat-stroked-button type="button" (click)="DeleteMyOffer(offers.id)"
-            >Supprimer l'offre
-            </a>
+            <button mat-stroked-button (click)="DeleteMyOffer(offers.id)" color="warn">Supprimer</button>
           </mdb-card-body>
           <div class="card-footer">
             <small class="text-muted">Last updated 3 mins ago</small>

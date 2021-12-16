@@ -73,7 +73,7 @@ export class SingleOfferMemberComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit(form: NgForm) {
-    // Do nothing pour le moment
+    this.offerService.updateOffer(form);
   }
 
   onBack(): void {

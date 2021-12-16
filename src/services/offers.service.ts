@@ -4,6 +4,7 @@ import { Offers } from '../models/offers.model';
 import { Category } from '../models/category';
 import * as auth from '../app/auth-config.json';
 import {InsertOfferModel} from '../models/insertOffer.model';
+import {NgForm} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -85,5 +86,11 @@ export class OffersService {
   // tslint:disable-next-line:typedef
   getByPlace(place: number) {
     return this.http.get<Offers[]>(this.url + '/offers/campus/' + place);
+  }
+
+  // tslint:disable-next-line:typedef
+  updateOffer(offer: NgForm){
+    // @ts-ignore
+    return this.http.put(this.url + '/offers' , offer);
   }
 }
