@@ -6,6 +6,7 @@ import * as auth from '../auth-config.json';
 import {Medias} from '../../models/medias.models';
 import {MediaService} from '../../services/medias.service';
 import { NgbCarouselConfig  } from '@ng-bootstrap/ng-bootstrap';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-single-offer',
@@ -29,6 +30,7 @@ export class SingleOfferComponent implements OnInit {
     private router: Router,
     private offerService: OffersService,
     private mediaService: MediaService,
+    private toastr: ToastrService,
     config: NgbCarouselConfig
   ) {
     config.interval = 5000;
@@ -50,29 +52,44 @@ export class SingleOfferComponent implements OnInit {
     // tslint:disable-next-line:radix
     this.offerService.getById(parseInt(id)).subscribe((offers: Offers) => {
       this.offers = offers;
-    });
+    },
+      err => {
+        this.toastr.error(err);
+      });
   }
 
   getMediaByOffer(id: string): void {
     // tslint:disable-next-line:radix
     this.mediaService.getByOffer(parseInt(id)).subscribe((medias: Medias[]) => {
       this.medias = medias;
-    });
+    },
+      err => {
+        this.toastr.error(err);
+      });
   }
 
   // tslint:disable-next-line:typedef
   resetSignalements() {
-    this.offerService.resetSignalements(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'));
+    this.offerService.resetSignalements(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'),
+      err => {
+        this.toastr.error(err);
+      });
   }
 
   // tslint:disable-next-line:typedef
   deleteOffer() {
-    this.offerService.deleteOffer(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'));
+    this.offerService.deleteOffer(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'),
+      err => {
+        this.toastr.error(err);
+      });
   }
 
   // tslint:disable-next-line:typedef
   signalerOffer() {
-    this.offerService.signalerOffer(this.id).subscribe(result => alert('Annonce signale'));
+    this.offerService.signalerOffer(this.id).subscribe(result => this.toastr.success('Annonce signale'),
+      err => {
+        this.toastr.error(err);
+      });
   }
 
   onBack(): void {

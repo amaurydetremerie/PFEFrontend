@@ -210,7 +210,10 @@ export class InsertOfferFormComponent implements OnInit {
     this.serviceCategory.getAllCategories()
       .subscribe((categories: Category[]) => {
         this.categories = categories;
-      });
+      },
+        err => {
+          this.toastr.error(err);
+        });
   }
 
 
@@ -230,7 +233,7 @@ export class InsertOfferFormComponent implements OnInit {
         this.toastr.success('Votre annonce a bien été envoyée');
         this.resetForm(form);
       }, err => {
-        this.toastr.error('Une erreur est survenue');
+        this.toastr.error(err);
         console.log(err);
       }
     );

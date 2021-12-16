@@ -6,6 +6,7 @@ import {Client} from '@microsoft/microsoft-graph-client';
 import {MsalService} from '@azure/msal-angular';
 import {AuthCodeMSALBrowserAuthenticationProvider} from '@microsoft/microsoft-graph-client/lib/src/authentication/msal-browser/AuthCodeMSALBrowserAuthenticationProvider';
 import {userService} from '../../services/user.service';
+import {ToastrService} from 'ngx-toastr';
 
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
@@ -33,7 +34,7 @@ export class MemberComponent implements OnInit {
   // tslint:disable-next-line:ban-types
 
   constructor(
-    private http: HttpClient, private authService: MsalService, private userservice: userService
+    private http: HttpClient, private authService: MsalService, private userservice: userService, private toastr: ToastrService
   ) {
   }
 
@@ -53,7 +54,10 @@ export class MemberComponent implements OnInit {
         console.log(profile);
         // @ts-ignore
         this.allProfile = profile.value;
-      });
+      },
+        err => {
+          this.toastr.error(err);
+        });
     });
   }
 

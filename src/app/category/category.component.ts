@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
 import {Category} from '../../models/category';
-import { Router } from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-category',
@@ -14,32 +14,41 @@ export class CategoryComponent implements OnInit {
 
   displayedColumns = ['id', 'name'];
 
-  constructor(private service: CategoryService, private _router: Router) { }
+  constructor(private service: CategoryService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAllCategories();
   }
 
-  getCategory(id:string): void {
-    let idToGet = parseInt(id);
-    this.service.getCategoryById(idToGet)
+  getCategory(id: string): void {
+    // tslint:disable-next-line:radix
+    this.service.getCategoryById(parseInt(id))
       .subscribe((categories: Category[]) => {
         this.categories = categories;
-      });
+      },
+        err => {
+          this.toastr.error(err);
+        });
   }
 
   getAllCategories(): void {
     this.service.getAllCategories()
       .subscribe((categories: Category[]) => {
         this.categories = categories;
-      });
+      },
+        err => {
+          this.toastr.error(err);
+        });
   }
 
-  goToChilds(id:string): void {
-    let parentId = parseInt(id);
-    this.service.getChildsCategory(parentId)
+  goToChilds(id: string): void {
+    // tslint:disable-next-line:radix
+    this.service.getChildsCategory(parseInt(id))
       .subscribe((categories: Category[]) => {
         this.categories = categories;
-      });
+      },
+        err => {
+          this.toastr.error(err);
+        });
   }
 }
