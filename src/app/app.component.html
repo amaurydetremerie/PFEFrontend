@@ -12,6 +12,10 @@
     Offers
   </button>
 
+  <button mat-raised-button *ngIf="isAdmin" [routerLink]="['admin/members']">
+    Tout les membres
+  </button>
+
   <button mat-raised-button *ngIf="isAdmin" [routerLink]="['admin/categories']">
     Categories Admin
   </button>

@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isIframe = window !== window.parent && !window.opener;
 
     this.checkAccount();
-    if(this.loggedIn){
+    if (this.loggedIn){
       this.checkAdmin();
     }
 
@@ -77,20 +77,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line:typedef
   checkAdmin() {
-    if(localStorage.getItem("isAdmin")==null){
+    if (localStorage.getItem('isAdmin') == null){
       this.authService.instance.acquireTokenSilent({
         scopes: ['user.read'],
         account: this.authService.instance.getAllAccounts()[0]
       }).then(response => {
-        localStorage.setItem("isAdmin",String(
+        localStorage.setItem('isAdmin', String(
           // @ts-ignore
-          response.idTokenClaims.roles.filter((x: string) => x === ('administrator')).length>0));
-          this.checkAdmin();
+          response.idTokenClaims.roles.filter((x: string) => x === ('administrator')).length > 0));
+        this.checkAdmin();
       });
     }
-    this.isAdmin=localStorage.getItem("isAdmin")==="true";
+    this.isAdmin = localStorage.getItem('isAdmin') === 'true';
   }
 
+  // tslint:disable-next-line:typedef
   login() {
     if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
       if (this.msalGuardConfig.authRequest) {
@@ -120,7 +121,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line:typedef
   logout() {
-    localStorage.removeItem("isAdmin");
+    localStorage.removeItem('isAdmin');
     this.authService.logout();
   }
 

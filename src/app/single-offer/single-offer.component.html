@@ -53,7 +53,23 @@
           <div>
             Numéro de l'annonce:
             {{ offers.id }}
+            <div *ngIf="isAdmin">
+              <button mat-stroked-button (click)="deleteOffer()" color="warn">
+                <mat-icon>
+                  delete
+                </mat-icon>
+              </button>
+            </div>
+            <div *ngIf="isAdmin">
+              <button mat-stroked-button (click)="resetSignalements()" color="primary">
+                <mat-icon>
+                  verified
+                </mat-icon>
+              </button>
+            </div>
+
             <button
+              (click)="signalerOffer()"
               type="button"
               class="btn btn-default"
               aria-label="Left Align"
@@ -69,6 +85,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
     <div class="col" id="second-card">
       <div class="card" style="width: 25rem">
@@ -123,4 +140,3 @@
       </div>
     </div>
   </div>
-</div>
