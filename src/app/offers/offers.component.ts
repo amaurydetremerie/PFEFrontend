@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { OffersService } from '../../services/offers.service';
-import { Offers } from '../../models/offers.model';
-import { Category } from '../../models/category';
+import {Component, OnInit} from '@angular/core';
+import {OffersService} from '../../services/offers.service';
+import {Offers} from '../../models/offers.model';
+import {Category} from '../../models/category';
 
 @Component({
   selector: 'app-offers',
@@ -15,7 +15,8 @@ export class OffersComponent implements OnInit {
 
   displayedColumns = ['title', 'description', 'place', 'sellerEMail'];
 
-  constructor(private service: OffersService) {}
+  constructor(private service: OffersService) {
+  }
 
   ngOnInit(): void {
     this.getOffers();
@@ -64,6 +65,12 @@ export class OffersComponent implements OnInit {
     this.service.getAllCategories().subscribe((categories: Category[]) => {
       this.categories = categories;
     });
+  }
+
+  // tslint:disable-next-line:typedef
+  signalerOffer(id: string) {
+    // tslint:disable-next-line:radix
+    this.service.signalerOffer(parseInt(id)).subscribe(result => alert('Annonce signale'));
   }
 
   goToChilds(id: string): void {

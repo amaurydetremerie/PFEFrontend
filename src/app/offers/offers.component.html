@@ -120,6 +120,10 @@
           <a mat-stroked-button [routerLink]="['/singleOffer', offers.id]"
             >Voir en détails
           </a>
+          <button (click)="signalerOffer(offers.id)" type="button" class="btn btn-default" aria-label="Left Align" id="report-button">
+            <span class="fa fa-exclamation-triangle fa-lg" aria-hidden="true" style="color: red"></span>
+            Signaler a VinciMarket
+          </button>
         </mdb-card-body>
         <div class="card-footer">
           <small class="text-muted">Last updated 3 mins ago</small>
