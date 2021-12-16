@@ -16,6 +16,10 @@ export class OffersService {
     return this.http.get<Offers[]>(this.url + '/offers');
   }
   // tslint:disable-next-line:typedef
+  getByMy(){
+    return this.http.get<Offers[]>(this.url + '/offers/me');
+  }
+  // tslint:disable-next-line:typedef
   getById(id: number) {
     return this.http.get<Offers>(this.url + '/offers/' + id);
   }

@@ -12,6 +12,8 @@ import { SingleOfferComponent } from './single-offer/single-offer.component';
 import { RoleGuard } from 'src/services/role-guard.service';
 import { CategoryAdminComponent } from './category-admin/category-admin.component';
 import { AnnonceSignaleComponent } from './annonce-signale/annonce-signale.component';
+import {SingleOfferMemberComponent} from './single-offer-member/single-offer-member.component';
+import {MyOffersComponent} from './myOffers/myOffers.component';
 
 /**
  * MSAL Angular can protect routes in your application
@@ -81,6 +83,16 @@ const routes: Routes = [
   {
     path: 'singleOffer/:id',
     component: SingleOfferComponent,
+    canActivate: [MsalGuard],
+  },
+  {
+    path: 'singleOffer',
+    component: SingleOfferMemberComponent,
+    canActivate: [MsalGuard],
+  },
+  {
+    path: 'myOffer',
+    component: MyOffersComponent,
     canActivate: [MsalGuard],
   },
   {
