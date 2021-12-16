@@ -62,7 +62,12 @@ const routes: Routes = [
     component: OffersComponent,
     canActivate: [MsalGuard],
   },
-
+  {
+    // Needed for hash routing
+    path: 'offers/:id',
+    component: OffersComponent,
+    canActivate: [MsalGuard],
+  },
   {
     path: 'categories',
     component: CategoryComponent,
