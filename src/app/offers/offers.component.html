@@ -1,4 +1,98 @@
-<div class="container">
+<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom">
+  <a class="navbar-brand ml-2 font-weight-bold" href="#"
+    ><span id="burgundy"></span><span id="orange">Annonces</span></a
+  >
+</nav>
+
+<!-- Sidebar filter section -->
+<section id="sidebar">
+  <div class="border-bottom pb-2 ml-2">
+    <h4 id="burgundy">Filtres</h4>
+  </div>
+  <div class="py-2 border-bottom ml-3">
+    <h5 class="font-weight-bold">Places</h5>
+    <div id="orange"><span class="fa fa-minus"></span></div>
+    <form #form="ngForm" (submit)="getByPlace(form.value)">
+      <div class="form-group">
+        <input type="radio" id="Woluwe" name="place" value="0" ngModel />
+        <label for="woluwe">Woluwe</label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="Louvain" name="place" value="2" ngModel />
+        <label for="louvain">Louvain</label>
+      </div>
+      <div class="form-group">
+        <input type="radio" id="Ixelles" name="place" value="1" ngModel />
+        <label for="ixelles">Ixelles</label>
+      </div>
+      <button mat-stroked-button type="submit" color="primary">
+        Filtrer par lieu
+      </button>
+    </form>
+  </div>
+  <div class="py-2 border-bottom ml-3">
+    <h5 class="font-weight-bold">Categories</h5>
+    <div id="orange"><span class="fa fa-minus"></span></div>
+    <div class="button-row">
+      <button mat-stroked-button (click)="getAllCategories()" color="primary">
+        Filtrer par categorie
+      </button>
+    </div>
+    <div *ngFor="let category of categories">
+      <section>
+        <div class="label">
+          <a
+            mat-stroked-button
+            [routerLink]=""
+            (click)="getOfferByCategory(category.id)"
+            >{{ category.name }}
+          </a>
+        </div>
+        <div class="button-row"></div>
+      </section>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+  <section class="filter-section">
+    <h5 class="font-weight-bold">Prix</h5>
+    <div id="orange"><span class="fa fa-minus"></span></div>
+    <form method="get" name="price-filters">
+      <div class="price-slider">
+        <div id="price-range" ya-no-ui-slider="price_slider"></div>
+        <div class="values group">
+          <span class="labels">€ - </span>
+          <input
+            class="form-control"
+            name="minVal"
+            id="minVal"
+            type="number"
+            ng-model="price_slider.start[0]"
+            #minVal
+          />
+          <span class="labels">€ </span>
+          <input
+            class="form-control"
+            name="maxVal"
+            id="maxVal"
+            type="number"
+            ng-model="price_slider.start[1]"
+            #maxVal
+          />
+          <button
+            mat-stroked-button
+            (click)="getByPriceFilter(minVal.value, maxVal.value)"
+            type="submit"
+            color="primary"
+          >
+            Filtrer par prix
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+</section>
+
+<section id="products">
   <div class="row">
     <div class="col-md-3 my-5" *ngFor="let offers of offers">
       <mdb-card>
@@ -26,10 +120,6 @@
           <a mat-stroked-button [routerLink]="['/singleOffer', offers.id]"
             >Voir en détails
           </a>
-          <button (click)="signalerOffer(offers.id)" type="button" class="btn btn-default" aria-label="Left Align" id="report-button">
-              <span class="fa fa-exclamation-triangle fa-lg" aria-hidden="true" style="color: red"></span>
-              Signaler a VinciMarket
-            </button>
         </mdb-card-body>
         <div class="card-footer">
           <small class="text-muted">Last updated 3 mins ago</small>
@@ -37,4 +127,4 @@
       </mdb-card>
     </div>
   </div>
-</div>
+</section>
