@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Offers } from '../models/offers.model';
 import { Category } from '../models/category';
 import * as auth from '../app/auth-config.json';
-import {InsertOfferModel} from "../models/insertOffer.model";
+import {InsertOfferModel} from '../models/insertOffer.model';
 
 @Injectable({
   providedIn: 'root',

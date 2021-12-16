@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom">
   <a class="navbar-brand ml-2 font-weight-bold" href="#"
-    ><span id="burgundy"></span><span id="orange">Annonces</span></a
+  ><span id="burgundy"></span><span id="orange">Annonces</span></a
   >
 </nav>
 
@@ -14,15 +14,15 @@
     <div id="orange"><span class="fa fa-minus"></span></div>
     <form #form="ngForm" (submit)="getByPlace(form.value)">
       <div class="form-group">
-        <input type="radio" id="Woluwe" name="place" value="0" ngModel />
+        <input type="radio" id="Woluwe" name="place" value="0" ngModel/>
         <label for="woluwe">Woluwe</label>
       </div>
       <div class="form-group">
-        <input type="radio" id="Louvain" name="place" value="2" ngModel />
+        <input type="radio" id="Louvain" name="place" value="2" ngModel/>
         <label for="louvain">Louvain</label>
       </div>
       <div class="form-group">
-        <input type="radio" id="Ixelles" name="place" value="1" ngModel />
+        <input type="radio" id="Ixelles" name="place" value="1" ngModel/>
         <label for="ixelles">Ixelles</label>
       </div>
       <button mat-stroked-button type="submit" color="primary">
@@ -45,7 +45,7 @@
             mat-stroked-button
             [routerLink]=""
             (click)="getOfferByCategory(category.id)"
-            >{{ category.name }}
+          >{{ category.name }}
           </a>
         </div>
         <div class="button-row"></div>
@@ -95,33 +95,38 @@
 <section id="products">
   <div class="row">
     <div class="col-md-3 my-5" *ngFor="let offers of offers">
-      <mdb-card>
-        <mdb-card-img
-          src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg"
-          alt="Card image cap"
-        >
-        </mdb-card-img>
-        <mdb-card-body>
-          <mdb-card-title>
-            <h2>{{ offers.title }}</h2>
-          </mdb-card-title>
-          <hr />
-          <mdb-card-text>
-            {{ offers.description }}
-          </mdb-card-text>
+      <div *ngIf="offers.deleted != true">
+        <mdb-card>
+          <mdb-card-img
+            src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg"
+            alt="Card image cap"
+          >
+          </mdb-card-img>
+          <mdb-card-body>
+            <mdb-card-title>
+              <h2>{{ offers.title }}</h2>
+            </mdb-card-title>
+            <hr/>
+            <mdb-card-text>
+              {{ offers.description }}
+            </mdb-card-text>
 
-          <mdb-card-text>
-            {{ offers.place }}
-          </mdb-card-text>
+            <mdb-card-text>
+              {{ offers.place }}
+            </mdb-card-text>
 
-          <a mat-stroked-button [routerLink]="['/myOffer', offers.id]"
+            <a mat-stroked-button [routerLink]="['/myOffer', offers.id]"
             >Modifier l'offre
-          </a>
-        </mdb-card-body>
-        <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-      </mdb-card>
+            </a>
+            <a mat-stroked-button type="button" (click)="DeleteMyOffer(offers.id)"
+            >Supprimer l'offre
+            </a>
+          </mdb-card-body>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </mdb-card>
+      </div>
     </div>
   </div>
 </section>

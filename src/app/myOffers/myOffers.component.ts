@@ -82,4 +82,12 @@ export class MyOffersComponent implements OnInit {
         this.categories = categories;
       });
   }
+
+  // tslint:disable-next-line:typedef
+  DeleteMyOffer(id: string) {
+    // tslint:disable-next-line:radix
+    const idToGet = parseInt(id);
+    this.service.deleteMyOffer(idToGet);
+    console.log('test');
+  }
 }
