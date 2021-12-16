@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AgmCoreModule} from '@agm/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
@@ -55,6 +56,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { RoleGuard } from '../services/role-guard.service';
 import { CategoryAdminComponent } from './category-admin/category-admin.component';
 import { AnnonceSignaleComponent } from './annonce-signale/annonce-signale.component';
+import { MediaService} from '../services/medias.service';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -143,6 +145,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
+    NgbModule,
   ],
   providers: [
     {
@@ -168,6 +171,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     OffersService,
     CategoryService,
     RoleGuard,
+    MediaService,
   ],
   bootstrap: [AppComponent],
 })

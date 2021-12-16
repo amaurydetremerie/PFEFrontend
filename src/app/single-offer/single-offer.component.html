@@ -2,21 +2,20 @@
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" id="main-card">
       <div class="card">
-        <div
-          class="bg-image hover-overlay ripple"
-          data-mdb-ripple-color="light"
-        >
-          <img
-            src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg"
-            class="img-fluid"
-          />
-          <a href="#!">
-            <div
-              class="mask"
-              style="background-color: rgba(251, 251, 251, 0.15)"
-            ></div>
-          </a>
+        <div *ngIf="medias.length > 0; else defaultImg">
+          <ngb-carousel>
+            <ng-template ngbSlide *ngFor="let media of medias">
+              <div class="wrapper">
+                <img [src]="url + media.path" alt="Random first slide" class="img-fluid mx-auto">
+              </div>
+            </ng-template>
+          </ngb-carousel>
         </div>
+        <ng-template #defaultImg>
+          <div class="wrapper">
+            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg" alt="Default Image" class="img-fluid mx-auto">
+          </div>
+        </ng-template>
         <div class="card-body">
           <h1 class="card-title font-weight-bold">
             <a>{{ offers.title }}</a>
