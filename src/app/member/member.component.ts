@@ -5,7 +5,7 @@ import * as auth from '../auth-config.json';
 import {Client} from '@microsoft/microsoft-graph-client';
 import {MsalService} from '@azure/msal-angular';
 import {AuthCodeMSALBrowserAuthenticationProvider} from '@microsoft/microsoft-graph-client/lib/src/authentication/msal-browser/AuthCodeMSALBrowserAuthenticationProvider';
-import {userService} from '../home/shared/user.service';
+import {userService} from '../../services/user.service';
 
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';

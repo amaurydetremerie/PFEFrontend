@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Offers } from './offers.model';
-import { Category } from './category.model';
-import * as auth from '../auth-config.json';
+import { Offers } from '../models/offers.model';
+import { Category } from '../models/category';
+import * as auth from '../app/auth-config.json';
 
 @Injectable({
   providedIn: 'root',

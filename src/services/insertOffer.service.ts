@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {InsertOfferModel, Places, States, Types} from './insertOffer.model';
+import {InsertOfferModel, Places, States, Types} from '../models/insertOffer.model';
 
 // @ts-ignore
 @Injectable({

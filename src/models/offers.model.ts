@@ -1,5 +1,5 @@
 import { NgPluralCase } from '@angular/common';
-import { Category } from './category.model';
+import { Category } from '../models/category';
 import { Types } from './types.model';
 import { States } from './states.model';
 import { Places } from './places.model';
