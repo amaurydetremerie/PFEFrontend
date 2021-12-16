@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Offers } from '../models/offers.model';
 import { Category } from '../models/category';
 import * as auth from '../app/auth-config.json';
+import {InsertOfferModel} from "../models/insertOffer.model";
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,10 @@ export class OffersService {
   // tslint:disable-next-line:typedef
   getById(id: number) {
     return this.http.get<Offers>(this.url + '/offers/' + id);
+  }
+  // tslint:disable-next-line:typedef
+  getMyById(id: number) {
+    return this.http.get<InsertOfferModel>(this.url + '/offers/me/' + id);
   }
   // tslint:disable-next-line:typedef
   getCategoryById(id: number) {
@@ -46,6 +51,10 @@ export class OffersService {
   // tslint:disable-next-line:typedef
   deleteOffer(id: number){
     return this.http.delete<Offers>(this.url + '/offers/' + id);
+  }
+  // tslint:disable-next-line:typedef
+  deleteMyOffer(id: number){
+    return this.http.delete<Offers>(this.url + '/offers/me/' + id);
   }
   // tslint:disable-next-line:typedef
   signalerOffer(id: number){

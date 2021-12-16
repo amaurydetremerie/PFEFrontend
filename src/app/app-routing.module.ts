@@ -86,7 +86,7 @@ const routes: Routes = [
     canActivate: [MsalGuard],
   },
   {
-    path: 'singleOffer',
+    path: 'myOffer/:id',
     component: SingleOfferMemberComponent,
     canActivate: [MsalGuard],
   },

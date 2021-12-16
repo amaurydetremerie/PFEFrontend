@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {OffersService} from '../../services/offers.service';
-import {Offers} from '../../models/offers.model';
 import {Router, ActivatedRoute} from '@angular/router';
-import * as auth from '../auth-config.json';
-import {Medias} from '../../models/medias.models';
-import {MediaService} from '../../services/medias.service';
-import { NgbCarouselConfig  } from '@ng-bootstrap/ng-bootstrap';
 import {ToastrService} from 'ngx-toastr';
+import {Types} from '../../models/types.model';
+import {Places} from '../../models/places.model';
+import {Category} from '../../models/category';
+import {CategoryService} from '../../services/category.service';
+import {States} from '../../models/states.model';
+import {NgForm} from '@angular/forms';
+import {InsertOfferModel} from '../../models/insertOffer.model';
 
 @Component({
   selector: 'app-single-offer-member',
@@ -17,11 +19,12 @@ import {ToastrService} from 'ngx-toastr';
 
 export class SingleOfferMemberComponent implements OnInit {
   // @ts-ignore
-  offers: Offers;
-  isAdmin = false;
+  offer: InsertOfferModel = new InsertOfferModel ();
+  categories: Category[] = [];
   id;
-  medias: Medias[] = [];
-  url = auth.resources.todoListApi.resourceUri + '/';
+  statesModel = States;
+  typesModel = Types;
+  placesModel = Places;
 
   displayedColumns = ['title', 'description', 'place', 'sellerEMail'];
 
@@ -29,48 +32,32 @@ export class SingleOfferMemberComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private offerService: OffersService,
-    private mediaService: MediaService,
+    private categoryService: CategoryService,
     private toastr: ToastrService,
-    config: NgbCarouselConfig
-  ) {
-    config.interval = 5000;
-    config.keyboard = true;
-    config.pauseOnHover = true;
-    config.showNavigationArrows = false;
-    config.showNavigationIndicators = false;
-    config.pauseOnFocus = true;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params.id;
-    this.getOffersById(this.id);
-    this.getMediaByOffer(this.id);
-    this.isAdmin = localStorage.getItem('isAdmin') === 'true';
+    this.getMyOffersById(this.id);
+    this.getAllCategories();
   }
 
-  getOffersById(id: string): void {
+  getAllCategories(): void {
+    this.categoryService.getAllCategories()
+      .subscribe((categories: Category[]) => {
+          this.categories = categories;
+        },
+        err => {
+          this.toastr.error(err);
+        });
+  }
+
+  getMyOffersById(id: string): void {
     // tslint:disable-next-line:radix
-    this.offerService.getById(parseInt(id)).subscribe((offers: Offers) => {
-      this.offers = offers;
+    this.offerService.getMyById(parseInt(id)).subscribe((offer: InsertOfferModel) => {
+      this.offer = offer;
+      console.log(offer);
     },
-      err => {
-        this.toastr.error(err);
-      });
-  }
-
-  getMediaByOffer(id: string): void {
-    // tslint:disable-next-line:radix
-    this.mediaService.getByOffer(parseInt(id)).subscribe((medias: Medias[]) => {
-      this.medias = medias;
-    },
-      err => {
-        this.toastr.error(err);
-      });
-  }
-
-  // tslint:disable-next-line:typedef
-  resetSignalements() {
-    this.offerService.resetSignalements(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'),
       err => {
         this.toastr.error(err);
       });
@@ -78,22 +65,18 @@ export class SingleOfferMemberComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   deleteOffer() {
-    this.offerService.deleteOffer(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'),
+    this.offerService.deleteMyOffer(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'),
       err => {
         this.toastr.error(err);
       });
   }
 
   // tslint:disable-next-line:typedef
-  signalerOffer() {
-    this.offerService.signalerOffer(this.id).subscribe(result => this.toastr.success('Annonce signale'),
-      err => {
-        this.toastr.error(err);
-      });
+  onSubmit(form: NgForm) {
+    // Do nothing pour le moment
   }
 
   onBack(): void {
     this.router.navigate(['offers']);
   }
-
 }

@@ -1,4 +1,3 @@
-import { NgPluralCase } from '@angular/common';
 import { Category } from '../models/category';
 import { Types } from './types.model';
 import { States } from './states.model';
