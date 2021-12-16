@@ -26,8 +26,8 @@ export class SingleOfferComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.params.id;
-    this.getOffersById(id);
+    this.id = this.activatedRoute.snapshot.params.id;
+    this.getOffersById(this.id);
     this.isAdmin = localStorage.getItem('isAdmin') === 'true';
   }
 
