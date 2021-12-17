@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {OffersService} from '../../services/offers.service';
-import {Router, ActivatedRoute} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {Types} from '../../models/types.model';
-import {Places} from '../../models/places.model';
-import {Category} from '../../models/category';
-import {CategoryService} from '../../services/category.service';
-import {States} from '../../models/states.model';
-import {NgForm} from '@angular/forms';
-import {InsertOfferModel} from '../../models/insertOffer.model';
+import { Component, OnInit } from '@angular/core';
+import { OffersService } from '../../services/offers.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Types } from '../../models/types.model';
+import { Places } from '../../models/places.model';
+import { Category } from '../../models/category';
+import { CategoryService } from '../../services/category.service';
+import { States } from '../../models/states.model';
+import { NgForm } from '@angular/forms';
+import { InsertOfferModel } from '../../models/insertOffer.model';
 
 @Component({
   selector: 'app-single-offer-member',
@@ -16,10 +16,9 @@ import {InsertOfferModel} from '../../models/insertOffer.model';
   styleUrls: ['./single-offer-member.component.css'],
   styles: [],
 })
-
 export class SingleOfferMemberComponent implements OnInit {
   // @ts-ignore
-  offer: InsertOfferModel = new InsertOfferModel ();
+  offer: InsertOfferModel = new InsertOfferModel();
   categories: Category[] = [];
   id;
   statesModel = States;
@@ -33,7 +32,7 @@ export class SingleOfferMemberComponent implements OnInit {
     private router: Router,
     private offerService: OffersService,
     private categoryService: CategoryService,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -43,43 +42,50 @@ export class SingleOfferMemberComponent implements OnInit {
   }
 
   getAllCategories(): void {
-    this.categoryService.getAllCategories()
-      .subscribe((categories: Category[]) => {
-          this.categories = categories;
-        },
-        err => {
-          this.toastr.error(err);
-        });
+    this.categoryService.getAllCategories().subscribe(
+      (categories: Category[]) => {
+        this.categories = categories;
+      },
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
   }
 
   getMyOffersById(id: string): void {
     // tslint:disable-next-line:radix
-    this.offerService.getMyById(parseInt(id)).subscribe((offer: InsertOfferModel) => {
-      this.offer = offer;
-      console.log(offer);
-    },
-      err => {
-        this.toastr.error(err);
-      });
+    this.offerService.getMyById(parseInt(id)).subscribe(
+      (offer: InsertOfferModel) => {
+        this.offer = offer;
+        console.log(offer);
+      },
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
   }
 
   // tslint:disable-next-line:typedef
   deleteOffer() {
-    this.offerService.deleteMyOffer(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'),
-      err => {
-        this.toastr.error(err);
-      });
+    this.offerService.deleteMyOffer(this.id).subscribe(
+      (result) => this.router.navigateByUrl('/admin/signalements'),
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
   }
 
   // tslint:disable-next-line:typedef
   onSubmit(form: NgForm) {
-    this.offerService.updateOffer(this.offer).subscribe(r => {
+    this.offerService.updateOffer(this.offer).subscribe(
+      (r) => {
         this.toastr.success('votre annonce a bien été mise à jour');
       },
-      err => {
-        this.toastr.error(err);
+      (err) => {
+        this.toastr.error(err.error);
         console.log(err);
-      });
+      }
+    );
   }
 
   onBack(): void {

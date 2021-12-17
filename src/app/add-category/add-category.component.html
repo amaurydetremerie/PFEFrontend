@@ -1,18 +1,64 @@
-<div class="center">
-<h1>Ajouter une catégorie</h1>
-<form (ngSubmit)="onSubmit()" #addCategoryForm="ngForm">
-    <div class="form-group">
+<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom">
+  <a class="navbar-brand ml-2 font-weight-bold" href="#"
+    ><span id="burgundy"></span
+    ><span id="orange"
+      ><p *ngIf="idCategoryToModify">Modifier une categorie</p>
+      <p *ngIf="!idCategoryToModify">Ajouter une categorie</p></span
+    ></a
+  >
+</nav>
 
+<div class="container py-3">
+  <form (ngSubmit)="onSubmit()" #addCategoryForm="ngForm">
+    <div class="form-row mb-4">
       <label for="name">Nom de la categorie</label>
-      <input type="text" [(ngModel)]="categoryToAdd.name" class="form-control" id="name" message="name"
-             placeholder="Enter your name" name="name" required #name="ngModel">
+      <input
+        *ngIf="!idCategoryToModify"
+        type="text"
+        [(ngModel)]="categoryToAdd.name"
+        class="form-control"
+        id="name"
+        message="name"
+        placeholder="Enter your name"
+        name="name"
+        required
+        #name="ngModel"
+      />
 
-        <label for="category">Categorie parente</label>
-        <select name="parentCategories" [(ngModel)]="categoryToAdd.parentId" class="form-control" id="category" >
-            <option optionnal *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
-        </select>
-        
+      <input
+        *ngIf="idCategoryToModify"
+        value="{{ categoryModify.name }}"
+        type="text"
+        [(ngModel)]="categoryToAdd.name"
+        class="form-control"
+        id="name"
+        message="name"
+        name="name"
+        #name="ngModel"
+      />
+
+      <label for="category">Categorie parente</label>
+      <select
+        name="parentCategories"
+        [(ngModel)]="categoryToAdd.parentId"
+        class="form-control"
+        id="category"
+      >
+        <option
+          optionnal
+          *ngFor="let category of categories"
+          [value]="category.id"
+        >
+          {{ category.name }}
+        </option>
+      </select>
     </div>
-    <button type="submit" [disabled]="!addCategoryForm.form.valid" class="btn btn-info">Submit</button>
+    <button
+      type="submit"
+      [disabled]="!addCategoryForm.form.valid"
+      class="btn btn-lg btn-success"
+    >
+      Ajouter
+    </button>
   </form>
 </div>

@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {OffersService} from '../../services/offers.service';
-import {Offers} from '../../models/offers.model';
-import {Category} from '../../models/category';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit } from '@angular/core';
+import { OffersService } from '../../services/offers.service';
+import { Offers } from '../../models/offers.model';
+import { Category } from '../../models/category';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-offers',
@@ -16,8 +16,7 @@ export class MyOffersComponent implements OnInit {
 
   displayedColumns = ['title', 'description', 'place', 'sellerEMail'];
 
-  constructor(private service: OffersService, private toastr: ToastrService) {
-  }
+  constructor(private service: OffersService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getOffers();
@@ -32,17 +31,21 @@ export class MyOffersComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getOfferByCategory(id: string) {
     // tslint:disable-next-line:radix
-    this.service.getOfferByCategory(parseInt(id)).subscribe((offers: Offers[]) => {
-      this.offers = offers;
-      console.log(this.offers);
-    });
+    this.service
+      .getOfferByCategory(parseInt(id))
+      .subscribe((offers: Offers[]) => {
+        this.offers = offers;
+        console.log(this.offers);
+      });
   }
 
   // tslint:disable-next-line:typedef
   getByPriceFilter(minPrice: string, maxPrice: string) {
-    this.service.getByPriceFilter(parseFloat(minPrice), parseFloat(maxPrice)).subscribe((offers: Offers[]) => {
-      this.offers = offers;
-    });
+    this.service
+      .getByPriceFilter(parseFloat(minPrice), parseFloat(maxPrice))
+      .subscribe((offers: Offers[]) => {
+        this.offers = offers;
+      });
   }
 
   // tslint:disable-next-line:typedef
@@ -71,7 +74,9 @@ export class MyOffersComponent implements OnInit {
   // tslint:disable-next-line:typedef
   signalerOffer(id: string) {
     // tslint:disable-next-line:radix
-    this.service.signalerOffer(parseInt(id)).subscribe(result => alert('Annonce signale'));
+    this.service
+      .signalerOffer(parseInt(id))
+      .subscribe((result) => alert('Annonce signale'));
   }
 
   goToChilds(id: string): void {
@@ -87,12 +92,14 @@ export class MyOffersComponent implements OnInit {
   // tslint:disable-next-line:typedef
   DeleteMyOffer(id: any) {
     // tslint:disable-next-line:radix
-    this.service.deleteMyOffer(id).subscribe(r => {
-      this.toastr.success('votre annonce a bien été supprimé');
+    this.service.deleteMyOffer(id).subscribe(
+      (r) => {
+        this.toastr.success('votre annonce a bien été supprimé');
       },
-      err => {
-        this.toastr.error(err);
-      });
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
     console.log('test');
   }
 }

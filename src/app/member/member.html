@@ -1,27 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-<table class="table caption-top">
-  <caption>Liste des membres</caption>
-  <thead>
-  <tr>
-    <th scope="col">Prénom</th>
-    <th scope="col">Nom</th>
-    <th scope="col">Mail</th>
-  </tr>
+<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom">
+  <a class="navbar-brand ml-2 font-weight-bold" href="#"
+    ><span id="burgundy"></span><span id="orange">Listes des membres</span></a
+  >
+</nav>
+
+<table mdbTable>
+  <thead class="grey lighten-1 black-text">
+    <tr>
+      <th scope="col">Prénom</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Mail</th>
+    </tr>
   </thead>
   <tbody>
-  <tr mdbTableCol *ngFor="let profiles of allProfile">
-    <td scope="row">{{profiles?.givenName}}</td>
-    <td>{{profiles?.surname}}</td>
-    <td>{{profiles?.userPrincipalName}}</td>
-    <td><button type="submit" (click)="ban(profiles?.id)">Bannir</button></td>
-  </tr>
+    <tr mdbTableCol *ngFor="let profiles of allProfile">
+      <td scope="row">{{profiles?.givenName}}</td>
+      <td>{{profiles?.surname}}</td>
+      <td>{{profiles?.userPrincipalName}}</td>
+      <td>
+        <button
+          mat-stroked-button
+          type="submit"
+          (click)="ban(profiles?.id)"
+          color="warn"
+        >
+          Bannir
+        </button>
+      </td>
+    </tr>
   </tbody>
 </table>
-</body>
-</html>

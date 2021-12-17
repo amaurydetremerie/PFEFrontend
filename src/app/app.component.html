@@ -1,50 +1,123 @@
-<mat-toolbar color="primary">
-  <img id="logoVinci" src="../assets/LogoVinciMarket.svg" alt="" />
-  <a class="title" [routerLink]="['/']">{{ title }}</a>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-info text-white">
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="#">
+    <img
+      src="../assets/LogoVinciMarket.svg"
+      height="50"
+      class="d-inline-block align-top"
+      alt="mdb logo"
+    />
+    VinciMarket
+  </a>
 
-  <div class="toolbar-spacer"></div>
+  <!-- Collapsible content -->
+  <links>
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a
+          class="nav-link waves-light"
+          *ngIf="loggedIn"
+          [routerLink]="['offers']"
+          mdbWavesEffect
+          >Annonces<span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link waves-light"
+          *ngIf="loggedIn"
+          [routerLink]="['insertOffer']"
+          mdbWavesEffect
+          >Introduire une annonce</a
+        >
+      </li>
+      <!-- <li class="nav-item">
+        <a
+          class="nav-link waves-light"
+          *ngIf="loggedIn"
+          [routerLink]="['categories']"
+          mdbWavesEffect
+          >Categories</a
+        >
+      </li>
+    -->
 
-  <button mat-raised-button *ngIf="loggedIn" [routerLink]="['categories']">
-    Categories
-  </button>
+      <li class="nav-item">
+        <a
+          class="nav-link waves-light"
+          *ngIf="loggedIn"
+          [routerLink]="['myOffer']"
+          mdbWavesEffect
+          >Mes annonces</a
+        >
+      </li>
 
-  <button mat-raised-button *ngIf="loggedIn" [routerLink]="['offers']">
-    Offers
-  </button>
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          *ngIf="isAdmin"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+        >
+          Options Admin<span class="caret"></span
+        ></a>
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a
+            class="dropdown-item waves-light"
+            *ngIf="isAdmin"
+            [routerLink]="['admin/categories']"
+            mdbWavesEffect
+            >Categories Admin</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            *ngIf="isAdmin"
+            [routerLink]="['admin/members']"
+            >Tout les membres</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            *ngIf="isAdmin"
+            [routerLink]="['admin/signalements']"
+            >Signalements</a
+          >
+        </div>
+      </li>
+    </ul>
+    <!-- Links -->
+    <form class="float-sm-right text-right" mdbWavesEffect>
+      <button
+        class="btn btn-primary float-right"
+        mat-raised-button
+        *ngIf="!loggedIn"
+        (click)="login()"
+      >
+        Se connecter avec Azure
+      </button>
+      <button
+        class="btn btn-primary float-right"
+        mat-raised-button
+        *ngIf="loggedIn"
+        color="warn"
+        (click)="logout()"
+      >
+        Se déconnecter
+      </button>
+    </form>
+  </links>
 
-  <button mat-raised-button *ngIf="isAdmin" [routerLink]="['admin/members']">
-    Tout les membres
-  </button>
-
-  <button mat-raised-button *ngIf="isAdmin" [routerLink]="['admin/categories']">
-    Categories Admin
-  </button>
-
-  <button mat-raised-button *ngIf="isAdmin" [routerLink]="['admin/signalements']">
-    Signalements
-  </button>
-
-
-
-
-    <button mat-raised-button *ngIf="loggedIn" [routerLink]="['insertOffer']">
-      Introduire une annonce
-    </button>
-
-
-  <button
-    class="btn-login"
-    mat-raised-button
-    *ngIf="!loggedIn"
-    (click)="login()"
-  >
-    Se connecter avec Azure
-  </button>
-  <button mat-raised-button *ngIf="loggedIn" color="warn" (click)="logout()">
-    Se déconnecter
-  </button>
-</mat-toolbar>
-
+  <!-- Collapsible content -->
+</mdb-navbar>
 
 <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
 <router-outlet *ngIf="!isIframe"></router-outlet>
@@ -106,7 +179,7 @@
                   style="color: white"
                 >
                   <i class="fab fa-instagram" aria-hidden="true"></i
-                  ></a>
+                ></a>
               </span>
               <span class="mx-2">
                 <a
@@ -114,11 +187,11 @@
                   style="color: white"
                 >
                   <i class="fab fa-twitter" aria-hidden="true"></i
-                  ></a>
+                ></a>
               </span>
             </p>
             <small class="rights"
-            ><span>&#174;</span> VinciMarket All Rights Reserved.</small
+              ><span>&#174;</span> VinciMarket All Rights Reserved.</small
             >
           </div>
           <div
@@ -142,7 +215,7 @@
           >
             <h6 class="text-muted bold-text"><b>Social</b></h6>
             <small
-            ><span><i class="fa fa-envelope" aria-hidden="true"></i></span>
+              ><span><i class="fa fa-envelope" aria-hidden="true"></i></span>
               social@gmail.com</small
             >
           </div>
@@ -151,4 +224,3 @@
     </div>
   </footer>
 </div>
-

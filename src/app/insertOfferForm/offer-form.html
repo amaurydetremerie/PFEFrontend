@@ -1,52 +1,95 @@
-<form #form="ngForm" (submit)="onSubmit(form)" class="form">
+<form #form="ngForm" (submit)="onSubmit(form)" class="container py-3">
+  <p class="h4 mb-4 text-center">Introduire une annonce</p>
 
-
-  <div class="form-group">
-    <div class="row mb-4">
-      <div class="col">
-        <div class="form-outline">
-          <label class="form-label">Titre</label><span style="color: red"> *</span>
-          <input type="text" class="form-control form-control-lg" placeholder="" name="title" required
-                 #title="ngModel"  [(ngModel)]="service.formData.title">
-        </div>
-      </div>
-    </div>
-
-    <div>
+  <div class="form-row mb-4">
+    <div class="col">
       <div class="form-outline">
-        <label class="form-label">Description</label>
-        <input type="text" class="form-control form-control-lg" placeholder="" name="description"
-               #description="ngModel" [(ngModel)]="service.formData.description">
+        <label class="form-label">Titre</label
+        ><span style="color: red"> *</span>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          placeholder=""
+          name="title"
+          required
+          #title="ngModel"
+          [(ngModel)]="service.formData.title"
+        />
       </div>
     </div>
   </div>
 
   <div>
+    <div class="form-outline">
+      <label class="form-label">Description</label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        placeholder=""
+        name="description"
+        #description="ngModel"
+        [(ngModel)]="service.formData.description"
+      />
+    </div>
+  </div>
+
+  <div>
     Type d'annonce <span style="color: red"> * </span> :
-    <br>
+    <br />
     <div class="form-check form-check-inline">
-      <input required class="form-check-input" type="radio" placeholder="" name="type" id="sale"
-             #type="ngModel"  [(ngModel)]="service.formData.type" [value]="service.type.Sale">
+      <input
+        required
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="type"
+        id="sale"
+        #type="ngModel"
+        [(ngModel)]="service.formData.type"
+        [value]="service.type.Sale"
+      />
       <label class="form-check-label" for="sale">A vendre</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" placeholder="" name="type" id="give"
-             #type="ngModel" [(ngModel)]="service.formData.type" [value]="service.type.Give">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="type"
+        id="give"
+        #type="ngModel"
+        [(ngModel)]="service.formData.type"
+        [value]="service.type.Give"
+      />
       <label class="form-check-label" for="give">A donner</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" placeholder="" name="type" id="service"
-             #type="ngModel" [(ngModel)]="service.formData.type" [value]="service.type.Service">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="type"
+        id="service"
+        #type="ngModel"
+        [(ngModel)]="service.formData.type"
+        [value]="service.type.Service"
+      />
       <label class="form-check-label" for="service">Service</label>
     </div>
   </div>
 
-  <br>
+  <br />
 
   <div class="form-group">
     <label>Prix</label>
-    <input type="number" class="form-control form-control-lg" placeholder="" name="price"
-           #price="ngModel" [(ngModel)]="service.formData.price">
+    <input
+      type="number"
+      class="form-control form-control-lg"
+      placeholder=""
+      name="price"
+      #price="ngModel"
+      [(ngModel)]="service.formData.price"
+    />
   </div>
 
   <!--
@@ -60,20 +103,45 @@
 
   <div>
     Campus de l'offre <span style="color: red"> * </span> :
-    <br>
+    <br />
     <div class="form-check form-check-inline">
-      <input required class="form-check-input" type="radio" placeholder="" name="place" id="woluwe"
-             #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Woluwe">
+      <input
+        required
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="place"
+        id="woluwe"
+        #type="ngModel"
+        [(ngModel)]="service.formData.place"
+        [value]="service.place.Woluwe"
+      />
       <label class="form-check-label" for="sale">Woluwe</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" placeholder="" name="place" id="ixelles"
-             #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Ixelles">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="place"
+        id="ixelles"
+        #type="ngModel"
+        [(ngModel)]="service.formData.place"
+        [value]="service.place.Ixelles"
+      />
       <label class="form-check-label" for="give">Ixelles</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" placeholder="" name="place" id="louvain"
-             #type="ngModel" [(ngModel)]="service.formData.place" [value]="service.place.Louvain">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="place"
+        id="louvain"
+        #type="ngModel"
+        [(ngModel)]="service.formData.place"
+        [value]="service.place.Louvain"
+      />
       <label class="form-check-label" for="service">Louvain-La-Neuve</label>
     </div>
   </div>
@@ -92,7 +160,6 @@
        </option>
      </select></div> -->
 
-
   <!--image -->
 
   <div [formGroup]="myForm">
@@ -103,59 +170,96 @@
       type="file"
       class="form-control"
       multiple=""
-      (change)="onFileChange($event)">
-    </div>
-
-
-
-  <div class="row align-items-center" *ngFor='let img of images'>
-    <div  class="col-6">
-    <img [src]="img.url" height="150" width="200px" style="margin: 3px;">
-    </div>
-    <div  class="col-6">
-    <button type="button" height="150" width="10px" style="margin: 3px;"
-            class="btn btn-danger" id="dltbutton" title="Delete" (click)="onDelete(img)">delete
-    </button>
+      (change)="onFileChange($event)"
+    />
   </div>
+
+  <div class="row align-items-center" *ngFor="let img of images">
+    <div class="col-6">
+      <img [src]="img.url" height="150" width="200px" style="margin: 3px" />
+    </div>
+    <div class="col-6">
+      <button
+        type="button"
+        height="150"
+        width="10px"
+        style="margin: 3px"
+        class="btn btn-danger"
+        id="dltbutton"
+        title="Delete"
+        (click)="onDelete(img)"
+      >
+        delete
+      </button>
+    </div>
   </div>
-  <br/>
+  <br />
 
   <!-- -->
   <!-- Video -->
 
-
   Video
   <div [formGroup]="myForm">
     <ng-container>
-      <input type="file" class="form-control" id="fileVideo" multiple (change)="getFileDetails($event)">
+      <input
+        type="file"
+        class="form-control"
+        id="fileVideo"
+        multiple
+        (change)="getFileDetails($event)"
+      />
     </ng-container>
   </div>
 
   <div class="row align-items-center" *ngFor="let Video of myFiles">
-  <div  class="col-6">
-    <video [src]="Video.path" width="200px" height="150" controls disabled="true"
-           (click)="toggleVideo($event)" #videoPlayer>
-    </video>
-  </div>
-  <div class="col-6">
-    <button type="button"
-            class="btn btn-danger " id="video" title="Delete" (click)="onDeleteVideo(Video)">
-      delete
-    </button>
-  </div>
+    <div class="col-6">
+      <video
+        [src]="Video.path"
+        width="200px"
+        height="150"
+        controls
+        disabled="true"
+        (click)="toggleVideo($event)"
+        #videoPlayer
+      ></video>
+    </div>
+    <div class="col-6">
+      <button
+        type="button"
+        class="btn btn-danger"
+        id="video"
+        title="Delete"
+        (click)="onDeleteVideo(Video)"
+      >
+        delete
+      </button>
+    </div>
   </div>
 
   <!--  -->
 
   <label for="category">Categorie</label><span style="color: red"> *</span>
-  <select required name="parentCategories" [(ngModel)]="this.service.formData.categoryId" class="form-select"
-          id="category">
-    <option optionnal *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+  <select
+    required
+    name="parentCategories"
+    [(ngModel)]="this.service.formData.categoryId"
+    class="form-select"
+    id="category"
+  >
+    <option optionnal *ngFor="let category of categories" [value]="category.id">
+      {{category.name}}
+    </option>
   </select>
 
-  <br>
+  <br />
   <div class="form-group text-center">
-    <button class="btn btn-success " type="submit" [disabled]="!form.form.valid">Confirmer</button>
+    <button
+      class="btn btn-lg btn-success"
+      type="submit"
+      [disabled]="!form.form.valid"
+    >
+      Confirmer
+    </button>
   </div>
 </form>
 
@@ -213,12 +317,10 @@
 </div>
 -->
 
-
 <!-- <select >
  <option>{{profile?.surname}}</option>
  <option>{{profile?.givenName}}</option>
 </select> -->
-
 
 <!-- <select *ngFor="let category of categories">
    <option *ngIf="goToChilds(category.id)">

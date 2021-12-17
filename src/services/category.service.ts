@@ -4,15 +4,19 @@ import { Category } from '../models/category';
 import * as auth from '../app/auth-config.json';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
   url = auth.resources.todoListApi.resourceUri;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getCategoryById(id: number) {
     return this.http.get<Category[]>(this.url + '/categories/' + id);
+  }
+
+  getCategoryById2(id: number) {
+    return this.http.get<Category>(this.url + '/categories/' + id);
   }
 
   getAllCategories() {
@@ -25,40 +29,41 @@ export class CategoryService {
 
   addCategory(category: Category) {
     var aEnvoyer;
-    if(category.parentId!=""){
+    if (category.parentId != '') {
       aEnvoyer = {
-        name:category.name,
-        parentId:category.parentId
-      }
-    }else{
+        name: category.name,
+        parentId: category.parentId,
+      };
+    } else {
       aEnvoyer = {
-        name:category.name
-      }
+        name: category.name,
+      };
     }
-    return this.http.post<Category>(this.url + '/categories', aEnvoyer,{
-      headers: { 'Content-Type': 'application/json' }});
+    return this.http.post<Category>(this.url + '/categories', aEnvoyer, {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
-  
+
   deleteCategory(id: number) {
-    return this.http.delete<Category>(this.url +'/categories/' + id)
+    return this.http.delete<Category>(this.url + '/categories/' + id);
   }
 
   updateCategory(category: Category) {
     var aEnvoyer;
-    if(category.parentId!=""){
+    if (category.parentId != '') {
       aEnvoyer = {
-        id:category.id,
-        name:category.name,
-        parentId:category.parentId
-      }
-    }else{
+        id: category.id,
+        name: category.name,
+        parentId: category.parentId,
+      };
+    } else {
       aEnvoyer = {
-        id:category.id,
-        name:category.name
-      }
+        id: category.id,
+        name: category.name,
+      };
     }
-    return this.http.put<Category>(this.url +'/categories',aEnvoyer,{
-      headers: { 'Content-Type': 'application/json' }})
+    return this.http.put<Category>(this.url + '/categories', aEnvoyer, {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
-
 }

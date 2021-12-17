@@ -1,19 +1,29 @@
 <div class="wrapper container">
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div
+    class="row row-cols-1 row-cols-md-3 g-4 d-flex justify-content-center mt-3"
+  >
     <div class="col" id="main-card">
       <div class="card">
         <div *ngIf="medias.length > 0; else defaultImg">
           <ngb-carousel>
             <ng-template ngbSlide *ngFor="let media of medias">
               <div class="wrapper">
-                <img [src]="url + media.path" alt="Random first slide" class="img-fluid mx-auto">
+                <img
+                  [src]="url + media.path"
+                  alt="Random first slide"
+                  class="img-fluid mx-auto"
+                />
               </div>
             </ng-template>
           </ngb-carousel>
         </div>
         <ng-template #defaultImg>
           <div class="wrapper">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg" alt="Default Image" class="img-fluid mx-auto">
+            <img
+              src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg"
+              alt="Default Image"
+              class="img-fluid mx-auto"
+            />
           </div>
         </ng-template>
         <div class="card-body">
@@ -29,15 +39,9 @@
             </li>
           </ul>
           <p class="mb-2">€ • {{ offers.price }}</p>
-          <p class="card-text" *ngIf="offers.type == 'Give' ">
-            A donner
-          </p>
-          <p class="card-text" *ngIf="offers.type == 'Sale' ">
-            A vendre
-          </p>
-          <p class="card-text" *ngIf="offers.type == 'Service' ">
-            Service
-          </p>
+          <p class="card-text" *ngIf="offers.type == 'Give'">A donner</p>
+          <p class="card-text" *ngIf="offers.type == 'Sale'">A vendre</p>
+          <p class="card-text" *ngIf="offers.type == 'Service'">Service</p>
           <hr class="my-4" />
           <p class="lead"><strong>Description</strong></p>
           <p class="card-text">
@@ -60,16 +64,16 @@
             {{ offers.id }}
             <div *ngIf="isAdmin">
               <button mat-stroked-button (click)="deleteOffer()" color="warn">
-                <mat-icon>
-                  delete
-                </mat-icon>
+                <mat-icon> delete </mat-icon>
               </button>
             </div>
             <div *ngIf="isAdmin">
-              <button mat-stroked-button (click)="resetSignalements()" color="primary">
-                <mat-icon>
-                  verified
-                </mat-icon>
+              <button
+                mat-stroked-button
+                (click)="resetSignalements()"
+                color="primary"
+              >
+                <mat-icon> verified </mat-icon>
               </button>
             </div>
 
@@ -91,57 +95,57 @@
         </div>
       </div>
     </div>
-    </div>
-    <div class="col" id="second-card">
-      <div class="card" style="width: 25rem">
-        <div class="card-body">
-          <i class="fa fa-user" style="font-size: 25px"></i>
-          <p class="text">
-            {{ offers.sellerEMail }}
-          </p>
-          <hr />
+  </div>
+  <div class="col" id="second-card">
+    <div class="card" style="width: 25rem">
+      <div class="card-body">
+        <i class="fa fa-user" style="font-size: 25px"></i>
+        <p class="text">
+          {{ offers.sellerEMail }}
+        </p>
+        <hr />
 
-          <div *ngIf="offers.place == 'Woluwe'">
-            <agm-map
-              [zoom]="19"
-              [latitude]="50.8495056284055"
-              [longitude]="4.451087123549969"
-            >
-            </agm-map>
-          </div>
-          <div *ngIf="offers.place == 'Ixelles'">
-            <agm-map
-              [zoom]="19"
-              [latitude]="50.838746672160404"
-              [longitude]="4.372030401340494"
-            >
-            </agm-map>
-          </div>
-
-          <div *ngIf="offers.place == 'Louvain'">
-            <agm-map
-              [zoom]="19"
-              [latitude]="50.671520461817884"
-              [longitude]="4.610756211363941"
-            >
-            </agm-map>
-          </div>
-          <hr />
-
-          <p class="card-text">
-            Si vous êtes interessé par l'annonce veuillez contacter le vendeur
-            en lui envoyant un message
-          </p>
-
-          <a
-            href="https://teams.microsoft.com/l/chat/0/0?users='{{
-              offers.sellerEMail
-            }}' "
-            class="btn btn-warning btn-rounded"
+        <div *ngIf="offers.place == 'Woluwe'">
+          <agm-map
+            [zoom]="19"
+            [latitude]="50.8495056284055"
+            [longitude]="4.451087123549969"
           >
-            <i class="fa fa-comments-o" aria-hidden="true"></i> Message
-          </a>
+          </agm-map>
         </div>
+        <div *ngIf="offers.place == 'Ixelles'">
+          <agm-map
+            [zoom]="19"
+            [latitude]="50.838746672160404"
+            [longitude]="4.372030401340494"
+          >
+          </agm-map>
+        </div>
+
+        <div *ngIf="offers.place == 'Louvain'">
+          <agm-map
+            [zoom]="19"
+            [latitude]="50.671520461817884"
+            [longitude]="4.610756211363941"
+          >
+          </agm-map>
+        </div>
+        <hr />
+
+        <p class="card-text">
+          Si vous êtes interessé par l'annonce veuillez contacter le vendeur en
+          lui envoyant un message
+        </p>
+
+        <a
+          href="https://teams.microsoft.com/l/chat/0/0?users='{{
+            offers.sellerEMail
+          }}' "
+          class="btn btn-warning btn-rounded"
+        >
+          <i class="fa fa-comments-o" aria-hidden="true"></i> Message
+        </a>
       </div>
     </div>
   </div>
+</div>

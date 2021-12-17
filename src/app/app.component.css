@@ -1,10 +1,12 @@
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-
 .mat-toolbar.mat-primary {
   background: #058aae;
   color: #fff;
+}
+
+button {
+  position: absolute;
+  right: 10px;
+  top: 5px;
 }
 
 a.title {
@@ -17,11 +19,11 @@ a.title {
   flex: 1 1 auto;
 }
 
-.btn-login {
-  width: fit-content;
-  background-size: contain;
-  cursor: pointer;
-  display: inline-block;
+#footer {
+  bottom: 0;
+  left: 0;
+  position: relative;
+  width: 100%;
 }
 
 #logoVinci {

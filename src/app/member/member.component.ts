@@ -1,23 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import * as auth from '../auth-config.json';
-import {Client} from '@microsoft/microsoft-graph-client';
-import {MsalService} from '@azure/msal-angular';
-import {AuthCodeMSALBrowserAuthenticationProvider} from '@microsoft/microsoft-graph-client/lib/src/authentication/msal-browser/AuthCodeMSALBrowserAuthenticationProvider';
-import {userService} from '../../services/user.service';
-import {ToastrService} from 'ngx-toastr';
-
+import { Client } from '@microsoft/microsoft-graph-client';
+import { MsalService } from '@azure/msal-angular';
+import { AuthCodeMSALBrowserAuthenticationProvider } from '@microsoft/microsoft-graph-client/lib/src/authentication/msal-browser/AuthCodeMSALBrowserAuthenticationProvider';
+import { userService } from '../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 const USER = 'https://graph.microsoft.com/v1.0/users';
 const USER_COUNT = 'https://graph.microsoft.com/v1.0/users?$count=true';
 
 type ProfileType = {
-  givenName?: string,
-  surname?: string,
-  userPrincipalName?: string,
-  id?: string
+  givenName?: string;
+  surname?: string;
+  userPrincipalName?: string;
+  id?: string;
 };
 
 @Component({
@@ -25,7 +24,6 @@ type ProfileType = {
   templateUrl: './member.html',
   styleUrls: ['./member.component.scss'],
 })
-
 export class MemberComponent implements OnInit {
   url = auth.resources.todoListApi.resourceUri;
   profile!: ProfileType;
@@ -34,37 +32,43 @@ export class MemberComponent implements OnInit {
   // tslint:disable-next-line:ban-types
 
   constructor(
-    private http: HttpClient, private authService: MsalService, private userservice: userService, private toastr: ToastrService
-  ) {
-  }
+    private http: HttpClient,
+    private authService: MsalService,
+    private userservice: userService,
+    private toastr: ToastrService
+  ) {}
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
     // @ts-ignore
-    this.authService.instance.acquireTokenSilent({
-      scopes: ['user.read.all'],
-      account: this.authService.instance.getAllAccounts()[0]
-    }).then(result => {
-      console.log(result);
-      this.http.get(USER, {
-        headers: {
-          Authorisation: ['Bearer ' + result.idToken]
-        }
-      }).subscribe(profile => {
-        console.log(profile);
-        // @ts-ignore
-        this.allProfile = profile.value;
-      },
-        err => {
-          this.toastr.error(err);
-        });
-    });
+    this.authService.instance
+      .acquireTokenSilent({
+        scopes: ['user.read.all'],
+        account: this.authService.instance.getAllAccounts()[0],
+      })
+      .then((result) => {
+        console.log(result);
+        this.http
+          .get(USER, {
+            headers: {
+              Authorisation: ['Bearer ' + result.idToken],
+            },
+          })
+          .subscribe(
+            (profile) => {
+              console.log(profile);
+              // @ts-ignore
+              this.allProfile = profile.value;
+            },
+            (err) => {
+              this.toastr.error(err.error);
+            }
+          );
+      });
   }
 
   // tslint:disable-next-line:typedef
   getProfile() {
-
-
     console.log('test2');
   }
 
@@ -74,13 +78,11 @@ export class MemberComponent implements OnInit {
     console.log(numberUsers);
     // @ts-ignore
     for (let i = 0; i < numberUsers; i++) {
-      this.http.get(USER)
-        .subscribe(profile => {
-          this.allProfile[i] = profile;
-        });
+      this.http.get(USER).subscribe((profile) => {
+        this.allProfile[i] = profile;
+      });
     }
   }
-
 
   /* elements: any = [
      {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
@@ -96,4 +98,3 @@ export class MemberComponent implements OnInit {
     console.log(id);
   }
 }
-
