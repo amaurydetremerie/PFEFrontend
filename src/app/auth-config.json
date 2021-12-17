@@ -4,14 +4,14 @@
     "tenantId": "8a1c421c-3731-4d67-8217-35d566f98717"
   },
   "configuration": {
-    "redirectUri": "https://pfefrontend.azurewebsites.net/",
-    "postLogoutRedirectUri": "https://pfefrontend.azurewebsites.net/"
+    "redirectUri": "https://pfefrontend.azurewebsites.net",
+    "postLogoutRedirectUri": "https://pfefrontend.azurewebsites.net"
   },
   "resources": {
     "todoListApi": {
-      "resourceUri": "https://pfebackend.azurewebsites.net/",
+      "resourceUri": "https://pfebackend.azurewebsites.net",
       "resourceScopes": ["https://pfebackend.azurewebsites.net/access_as_user"],
-      "localUri": "https://pfebackend.azurewebsites.net/"
+      "localUri": "https://pfebackend.azurewebsites.net"
     }
   }
 }
