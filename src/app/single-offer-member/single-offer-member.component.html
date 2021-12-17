@@ -1,0 +1,210 @@
+<form #form="ngForm" (submit)="onSubmit(form)" class="container py-3">
+  <p class="h4 mb-4 text-center">Modifier une annonce</p>
+  <div class="form-row mb-4">
+    <div class="col">
+      <div class="form-outline">
+        <label class="form-label">Titre : </label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          placeholder="{{ offer.title }}"
+          name="title"
+          #type="ngModel"
+          [(ngModel)]="offer.title"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="form-outline">
+    <!-- Description -->
+    Description :
+    <input
+      type="text"
+      class="form-control form-control-lg"
+      placeholder="{{ offer.description }}"
+      name="description"
+      #type="ngModel"
+      [(ngModel)]="offer.description"
+    />
+  </div>
+  <div class="form-outline">
+    <!-- Type -->
+    Type d'annonce <span style="color: red"> * </span> :
+    <br />
+    <div class="form-check form-check-inline">
+      <input
+        required
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="type"
+        id="sale"
+        #type="ngModel"
+        [(ngModel)]="offer.type"
+        [value]="typesModel.Sale"
+      />
+      <label class="form-check-label" for="sale">A vendre</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="type"
+        id="give"
+        #type="ngModel"
+        [(ngModel)]="offer.type"
+        [value]="typesModel.Give"
+      />
+      <label class="form-check-label" for="give">A donner</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="type"
+        id="service"
+        #type="ngModel"
+        [(ngModel)]="offer.type"
+        [value]="typesModel.Service"
+      />
+      <label class="form-check-label" for="service">Service</label>
+    </div>
+  </div>
+  <div class="form-outline">
+    <!-- Price --><label class="form-label">Prix : </label>
+    <input
+      type="number"
+      class="form-control form-control-lg"
+      placeholder="{{ offer.price }}"
+      name="price"
+      #type="ngModel"
+      [(ngModel)]="offer.price"
+    />
+  </div>
+
+  <div class="form-outline">
+    <!-- Place -->
+    Campus de l'offre <span style="color: red"> * </span> :
+    <br />
+    <div class="form-check form-check-inline">
+      <input
+        required
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="place"
+        id="woluwe"
+        #type="ngModel"
+        [(ngModel)]="offer.place"
+        [value]="placesModel.Woluwe"
+      />
+      <label class="form-check-label" for="sale">Woluwe</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="place"
+        id="ixelles"
+        #type="ngModel"
+        [(ngModel)]="offer.place"
+        [value]="placesModel.Ixelles"
+      />
+      <label class="form-check-label" for="give">Ixelles</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="place"
+        id="louvain"
+        #type="ngModel"
+        [(ngModel)]="offer.place"
+        [value]="placesModel.Louvain"
+      />
+      <label class="form-check-label" for="service">Louvain-La-Neuve</label>
+    </div>
+  </div>
+
+  <div class="form-outline">
+    <!-- Category -->
+    <label for="category">Categorie</label><span style="color: red"> *</span>
+    <select
+      required
+      name="categoryId"
+      [(ngModel)]="offer.categoryId"
+      class="form-select"
+      id="category"
+    >
+      <option
+        optionnal
+        *ngFor="let category of categories"
+        [value]="category.id"
+      >
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-outline">
+    Visibilité <span style="color: red"> * </span> :
+    <br />
+    <div class="form-check form-check-inline">
+      <input
+        required
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="state"
+        id="published"
+        #type="ngModel"
+        [(ngModel)]="offer.state"
+        [value]="statesModel.Published"
+      />
+      <label class="form-check-label" for="sale">Publié</label>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="state"
+        id="invisible"
+        #type="ngModel"
+        [(ngModel)]="offer.state"
+        [value]="statesModel.Invisible"
+      />
+      <label class="form-check-label" for="give">Invisible</label>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <input
+        class="form-check-input"
+        type="radio"
+        placeholder=""
+        name="state"
+        id="sold"
+        #type="ngModel"
+        [(ngModel)]="offer.state"
+        [value]="statesModel.Sell"
+      />
+      <label class="form-check-label" for="give">Vendu</label>
+    </div>
+  </div>
+
+  <br />
+  <div class="form-group text-center">
+    <button
+      class="btn btn-lg btn-success"
+      type="submit"
+      [disabled]="!form.form.valid"
+    >
+      Confirmer
+    </button>
+  </div>
+</form>

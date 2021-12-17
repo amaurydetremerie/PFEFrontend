@@ -6,11 +6,11 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-offers',
-  templateUrl: './offers.component.html',
-  styleUrls: ['./offers.component.css'],
+  templateUrl: './myOffers.component.html',
+  styleUrls: ['./myOffers.component.css'],
   styles: [],
 })
-export class OffersComponent implements OnInit {
+export class MyOffersComponent implements OnInit {
   offers: Offers[] = [];
   categories: Category[] = [];
 
@@ -23,101 +23,83 @@ export class OffersComponent implements OnInit {
   }
 
   getOffers(): void {
-    this.service.getByPrice().subscribe(
-      (offers: Offers[]) => {
-        this.offers = offers;
-      },
-      (err) => {
-        this.toastr.error(err.error);
-      }
-    );
+    this.service.getByMy().subscribe((offers: Offers[]) => {
+      this.offers = offers;
+    });
   }
 
   // tslint:disable-next-line:typedef
   getOfferByCategory(id: string) {
     // tslint:disable-next-line:radix
-    this.service.getOfferByCategory(parseInt(id)).subscribe(
-      (offers: Offers[]) => {
+    this.service
+      .getOfferByCategory(parseInt(id))
+      .subscribe((offers: Offers[]) => {
         this.offers = offers;
         console.log(this.offers);
-      },
-      (err) => {
-        this.toastr.error(err.error);
-      }
-    );
+      });
   }
 
   // tslint:disable-next-line:typedef
   getByPriceFilter(minPrice: string, maxPrice: string) {
     this.service
       .getByPriceFilter(parseFloat(minPrice), parseFloat(maxPrice))
-      .subscribe(
-        (offers: Offers[]) => {
-          this.offers = offers;
-        },
-        (err) => {
-          this.toastr.error(err.error);
-        }
-      );
+      .subscribe((offers: Offers[]) => {
+        this.offers = offers;
+      });
   }
 
   // tslint:disable-next-line:typedef
   getByPlace(value: any) {
-    this.service.getByPlace(value.place).subscribe(
-      (offers: Offers[]) => {
-        this.offers = offers;
-      },
-      (err) => {
-        this.toastr.error(err.error);
-      }
-    );
+    this.service.getByPlace(value.place).subscribe((offers: Offers[]) => {
+      this.offers = offers;
+    });
   }
 
   getCategory(id: string): void {
     // tslint:disable-next-line:radix
     const idToGet = parseInt(id);
-    this.service.getCategoryById(idToGet).subscribe(
-      (categories: Category[]) => {
+    this.service
+      .getCategoryById(idToGet)
+      .subscribe((categories: Category[]) => {
         this.categories = categories;
-      },
-      (err) => {
-        this.toastr.error(err.error);
-      }
-    );
+      });
   }
 
   getAllCategories(): void {
-    this.service.getAllCategories().subscribe(
-      (categories: Category[]) => {
-        this.categories = categories;
-      },
-      (err) => {
-        this.toastr.error(err.error);
-      }
-    );
+    this.service.getAllCategories().subscribe((categories: Category[]) => {
+      this.categories = categories;
+    });
   }
 
   // tslint:disable-next-line:typedef
   signalerOffer(id: string) {
     // tslint:disable-next-line:radix
-    this.service.signalerOffer(parseInt(id)).subscribe(
-      (result) => this.toastr.success('Annonce signale'),
-      (err) => {
-        this.toastr.error(err.error);
-      }
-    );
+    this.service
+      .signalerOffer(parseInt(id))
+      .subscribe((result) => alert('Annonce signale'));
   }
 
   goToChilds(id: string): void {
     // tslint:disable-next-line:radix
     const parentId = parseInt(id);
-    this.service.getChildsCategory(parentId).subscribe(
-      (categories: Category[]) => {
+    this.service
+      .getChildsCategory(parentId)
+      .subscribe((categories: Category[]) => {
         this.categories = categories;
+      });
+  }
+
+  // tslint:disable-next-line:typedef
+  DeleteMyOffer(id: any) {
+    // tslint:disable-next-line:radix
+    this.service.deleteMyOffer(id).subscribe(
+      (r) => {
+        this.toastr.success('votre annonce a bien été supprimé');
       },
       (err) => {
         this.toastr.error(err.error);
       }
     );
+    console.log('test');
   }
 }

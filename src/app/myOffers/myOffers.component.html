@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom">
+  <a class="navbar-brand ml-2 font-weight-bold" href="#"
+    ><span id="burgundy"></span><span id="orange">Mes annonces</span></a
+  >
+</nav>
+
+<section id="products" class="d-flex justify-content-center">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-3 my-5" *ngFor="let offers of offers">
+      <div *ngIf="offers.deleted != true">
+        <mdb-card>
+          <mdb-card-img
+            src="https://mdbootstrap.com/img/Photos/Horizontal/Food/8-col/img (5).jpg"
+            alt="Card image cap"
+          >
+          </mdb-card-img>
+          <mdb-card-body>
+            <mdb-card-title>
+              <h2>{{ offers.title }}</h2>
+            </mdb-card-title>
+            <hr />
+            <mdb-card-text>
+              {{ offers.description }}
+            </mdb-card-text>
+
+            <mdb-card-text>
+              {{ offers.place }}
+            </mdb-card-text>
+
+            <a mat-stroked-button [routerLink]="['/myOffer', offers.id]"
+              >Modifier l'annonce
+            </a>
+            <button
+              mat-stroked-button
+              (click)="DeleteMyOffer(offers.id)"
+              color="warn"
+            >
+              Supprimer
+            </button>
+          </mdb-card-body>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </mdb-card>
+      </div>
+    </div>
+  </div>
+</section>

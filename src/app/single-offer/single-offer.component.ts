@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {OffersService} from '../../services/offers.service';
-import {Offers} from '../../models/offers.model';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { OffersService } from '../../services/offers.service';
+import { Offers } from '../../models/offers.model';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as auth from '../auth-config.json';
-import {Medias} from '../../models/medias.models';
-import {MediaService} from '../../services/medias.service';
-import { NgbCarouselConfig  } from '@ng-bootstrap/ng-bootstrap';
+import { Medias } from '../../models/medias.models';
+import { MediaService } from '../../services/medias.service';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-single-offer',
@@ -13,7 +14,6 @@ import { NgbCarouselConfig  } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./single-offer.component.css'],
   styles: [],
 })
-
 export class SingleOfferComponent implements OnInit {
   // @ts-ignore
   offers: Offers;
@@ -29,6 +29,7 @@ export class SingleOfferComponent implements OnInit {
     private router: Router,
     private offerService: OffersService,
     private mediaService: MediaService,
+    private toastr: ToastrService,
     config: NgbCarouselConfig
   ) {
     config.interval = 5000;
@@ -48,35 +49,59 @@ export class SingleOfferComponent implements OnInit {
 
   getOffersById(id: string): void {
     // tslint:disable-next-line:radix
-    this.offerService.getById(parseInt(id)).subscribe((offers: Offers) => {
-      this.offers = offers;
-    });
+    this.offerService.getById(parseInt(id)).subscribe(
+      (offers: Offers) => {
+        this.offers = offers;
+      },
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
   }
 
   getMediaByOffer(id: string): void {
     // tslint:disable-next-line:radix
-    this.mediaService.getByOffer(parseInt(id)).subscribe((medias: Medias[]) => {
-      this.medias = medias;
-    });
+    this.mediaService.getByOffer(parseInt(id)).subscribe(
+      (medias: Medias[]) => {
+        this.medias = medias;
+      },
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
   }
 
   // tslint:disable-next-line:typedef
   resetSignalements() {
-    this.offerService.resetSignalements(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'));
+    this.offerService.resetSignalements(this.id).subscribe(
+      (result) => this.router.navigateByUrl('/admin/signalements'),
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
   }
 
   // tslint:disable-next-line:typedef
   deleteOffer() {
-    this.offerService.deleteOffer(this.id).subscribe(result => this.router.navigateByUrl('/admin/signalements'));
+    this.offerService.deleteOffer(this.id).subscribe(
+      (result) => this.router.navigateByUrl('/admin/signalements'),
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
   }
 
   // tslint:disable-next-line:typedef
   signalerOffer() {
-    this.offerService.signalerOffer(this.id).subscribe(result => alert('Annonce signale'));
+    this.offerService.signalerOffer(this.id).subscribe(
+      (result) => this.toastr.success('Annonce signale'),
+      (err) => {
+        this.toastr.error(err.error);
+      }
+    );
   }
 
   onBack(): void {
     this.router.navigate(['offers']);
   }
-
 }

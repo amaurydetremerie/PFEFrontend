@@ -57,6 +57,8 @@ import { RoleGuard } from '../services/role-guard.service';
 import { CategoryAdminComponent } from './category-admin/category-admin.component';
 import { AnnonceSignaleComponent } from './annonce-signale/annonce-signale.component';
 import { MediaService} from '../services/medias.service';
+import {SingleOfferMemberComponent} from './single-offer-member/single-offer-member.component';
+import {MyOffersComponent} from './myOffers/myOffers.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -118,6 +120,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     CategoryComponent,
     AddCategoryComponent,
     SingleOfferComponent,
+    SingleOfferMemberComponent,
+    MyOffersComponent,
     CategoryAdminComponent,
     AnnonceSignaleComponent,
   ],

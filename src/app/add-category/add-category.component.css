@@ -1,4 +1,21 @@
-.center{
-    margin: 0 auto;
+.center {
+  margin: 0 auto;
+}
 
+#burgundy {
+  color: rgb(153, 40, 59);
+}
+
+#orange,
+select,
+.btn {
+  color: orange;
+}
+
+.search-nav-item {
+  height: 40px;
+}
+
+nav {
+  padding: 0px 100px;
 }
